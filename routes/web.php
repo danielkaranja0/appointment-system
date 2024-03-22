@@ -20,3 +20,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/appointments', function () {
+    // Fetch appointments data from your database and pass it to the view
+    $appointments = App\Models\Appointment::all(); // Adjust this according to your database model
+    
+    return view('appointments', compact('appointments'));
+});

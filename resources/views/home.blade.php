@@ -10,7 +10,7 @@
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">
+                        <a class="nav-link active" href="{{ url('/appointments') }}">
                             <h1 class="h2">Dashboard</h1>
                             <i class="fas fa-calendar-alt mr-2 text-dark"></i>
                             <span class="text-dark">Appointments</span> <span class="sr-only">(current)</span>
