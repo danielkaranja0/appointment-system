@@ -27,3 +27,10 @@ Route::get('/appointments', function () {
     
     return view('appointments', compact('appointments'));
 });
+
+Route::get('/users', function () {
+    // Fetch appointments data from your database and pass it to the view
+    $users = App\Models\User::all(); // Adjust this according to your database model
+    
+    return view('users', compact('users'));
+});
