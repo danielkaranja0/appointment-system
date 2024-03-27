@@ -73,6 +73,7 @@
 
 @push('scripts')
 <script>
+    // Wait for the document to be fully loaded
     $(document).ready(function() {
         // Reset the form when the modal is closed
         $('#addAppointmentModal').on('hidden.bs.modal', function () {

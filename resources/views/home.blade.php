@@ -23,7 +23,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link"  href="{{ url('/calendar') }}">
                             <i class="fas fa-calendar mr-2 text-dark"></i>
                             <span class="text-dark">Calendar</span>
                         </a>

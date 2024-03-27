@@ -34,3 +34,10 @@ Route::get('/users', function () {
     
     return view('users', compact('users'));
 });
+
+Route::get('/calendar', function () {
+    return view('calendar');
+});
+
+
+
