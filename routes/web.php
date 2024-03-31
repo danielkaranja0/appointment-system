@@ -39,5 +39,7 @@ Route::get('/calendar', function () {
     return view('calendar');
 });
 
-
+Route::get('/help', function () {
+    return view('help');
+});
 
