@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AppointmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,4 +43,13 @@ Route::get('/calendar', function () {
 Route::get('/help', function () {
     return view('help');
 });
+
+// routes/web.php
+
+
+
+
+
+Route::post('/appointments/store', [AppointmentController::class, 'store'])->name('appointments.store');
+
 

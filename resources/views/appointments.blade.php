@@ -57,49 +57,50 @@
                             </div>
                             <div class="modal-body">
                                 <!-- Form for adding appointment -->
-                                <form>
+                                <form id="addAppointmentForm">
+                                    @csrf
                                     <!-- Appointment Name -->
                                     <div class="mb-3">
                                         <label for="appointmentName" class="form-label">Name</label>
-                                        <input type="text" class="form-control" id="appointmentName" placeholder="Enter name" required>
+                                        <input type="text" class="form-control" id="appointmentName" name="name" placeholder="Enter name" required>
                                     </div>
                                     
                                     <!-- Category -->
                                     <div class="mb-3">
                                         <label for="appointmentCategory" class="form-label">Category</label>
-                                        <select class="form-select" id="appointmentCategory" required>
+                                        <select class="form-select" id="appointmentCategory" name="category" required>
                                             <option value="">Select category</option>
-                                            <option value="">Staff Appointment</option>
-                                            <option value="">Business Consultation</option>
-                                            <option value="">Company Meeting</option>
-                                            <option value="">Conflict Resolution</option>
+                                            <option value="staff_appointment">Staff Appointment</option>
+                                            <option value="business_consultation">Business Consultation</option>
+                                            <option value="business_appointment">Business Appointment</option>
+                                            <option value="conflict_resolution">Conflict Resolution</option>
                                         </select>
                                     </div>
                                     <!-- Phone Number -->
                                     <div class="mb-3">
                                         <label for="appointmentPhone" class="form-label">Phone Number</label>
-                                        <input type="tel" class="form-control" id="appointmentPhone" placeholder="Enter phone number" required>
+                                        <input type="tel" class="form-control" id="appointmentPhone" name="phone" placeholder="Enter phone number" required>
                                     </div>
                                     <!-- Appointment Date -->
                                     <div class="mb-3">
                                         <label for="appointmentDate" class="form-label">Appointment Date</label>
-                                        <input type="date" class="form-control" id="appointmentDate" required>
+                                        <input type="date" class="form-control" id="appointmentDate" name="appointment_date" required>
                                     </div>
                                     <!-- Appointment Time -->
                                     <div class="mb-3">
                                         <label for="appointmentTime" class="form-label">Appointment Time</label>
-                                        <input type="time" class="form-control" id="appointmentTime" required>
+                                        <input type="time" class="form-control" id="appointmentTime" name="appointment_time" required>
                                     </div>
                                     <!-- Description -->
                                     <div class="mb-3">
                                         <label for="appointmentDescription" class="form-label">Description</label>
-                                        <textarea class="form-control" id="appointmentDescription" placeholder="Enter description"></textarea>
+                                        <textarea class="form-control" id="appointmentDescription" name="description" placeholder="Enter description"></textarea>
                                     </div>
                                 </form>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
+                                <button type="button" class="btn btn-primary" id="saveAppointmentBtn">Save changes</button>
                             </div>
                         </div>
                     </div>
@@ -112,12 +113,12 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Description</th>
                             <th>Category</th>
                             <th>Phone Number</th>
                             <th>Appointment Date</th>
                             <th>Appointment Time</th>
                             <th>Status</th>
+                            <th>Description</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -127,11 +128,11 @@
                         <tr>
                             <td>{{ $appointment->id }}</td>
                             <td>{{ $appointment->name }}</td>
-                            <td>{{ $appointment->description }}</td>
                             <td>{{ $appointment->category }}</td>
                             <td>{{ $appointment->phone }}</td>
                             <td>{{ $appointment->appointment_date }}</td>
                             <td>{{ $appointment->appointment_time }}</td>
+                            <td>{{ $appointment->description }}</td>
                             <td>{{ $appointment->status }}</td>
                             <td>
                                 <!-- Add actions/buttons here, e.g., Edit, Delete -->
@@ -146,4 +147,33 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add event listener to the save button
+        document.getElementById('saveAppointmentBtn').addEventListener('click', function() {
+            // Get form data
+            const formData = new FormData(document.getElementById('addAppointmentForm'));
+
+            // Send AJAX request to store the appointment
+            fetch('{{ route("appointments.store") }}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle success response
+                console.log(data.message);
+                location.reload(); // Reload the page to refresh the appointments table
+            })
+            .catch(error => {
+                // Handle error
+                console.error('Error:', error);
+            });
+        });
+    });
+</script>
 @endsection
