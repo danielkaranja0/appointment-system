@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppointmentController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -48,8 +49,7 @@ Route::get('/help', function () {
 
 
 
-
-
 Route::post('/appointments/store', [AppointmentController::class, 'store'])->name('appointments.store');
+
 
 

@@ -69,7 +69,6 @@
                                     <div class="mb-3">
                                         <label for="appointmentCategory" class="form-label">Category</label>
                                         <select class="form-select" id="appointmentCategory" name="category" required>
-                                            <option value="">Select category</option>
                                             <option value="staff_appointment">Staff Appointment</option>
                                             <option value="business_consultation">Business Consultation</option>
                                             <option value="business_appointment">Business Appointment</option>

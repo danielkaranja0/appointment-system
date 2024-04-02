@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Log;
 
 class AppointmentController extends Controller
 {
@@ -18,9 +18,10 @@ class AppointmentController extends Controller
             'description' => 'nullable',
             'status' => 'required',
         ]);
-
+    
         Appointment::create($validatedData);
-
+    
         return response()->json(['message' => 'Appointment created successfully'], 200);
     }
+    
 }
