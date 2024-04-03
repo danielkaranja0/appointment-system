@@ -95,6 +95,15 @@
                                         <label for="appointmentDescription" class="form-label">Description</label>
                                         <textarea class="form-control" id="appointmentDescription" name="description" placeholder="Enter description"></textarea>
                                     </div>
+
+                                    <div class="mb-3">
+                                        <label for="appointmentStatus" class="form-label">Status</label>
+                                        <select class="form-select" id="appointmentStatus" name="status" required>
+                                            <option value="accepted">Accepted</option>
+                                            <option value="rejected">Rejected</option>
+                                            <option value="rescheduled">Rescheduled</option>
+                                        </select>
+                                    </div>
                                 </form>
                             </div>
                             <div class="modal-footer">
@@ -150,14 +159,17 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Add event listener to the save button
-        document.getElementById('saveAppointmentBtn').addEventListener('click', function() {
+        document.getElementById('saveAppointmentBtn').addEventListener('click', function(e) {
+            e.preventDefault();
             // Get form data
             const formData = new FormData(document.getElementById('addAppointmentForm'));
+            formData.set('name', document.querySelector('#appointmentName').value);
+            console.log(formData.entries());
 
             // Send AJAX request to store the appointment
             fetch('{{ route("appointments.store") }}', {
                 method: 'POST',
-                body: formData,
+                body:formData,
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 }
@@ -170,7 +182,7 @@
             })
             .catch(error => {
                 // Handle error
-                console.error('Error:', error);
+                console.log('Error:', error);
             });
         });
     });

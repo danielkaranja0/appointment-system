@@ -11,14 +11,17 @@ class AppointmentController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required',
-            'category' => 'required|in:staff_appointment,business_consultation,business_appointment,conflict_resolution',
+            'category' => 'required', //in:staff_appointment,business_consultation,business_appointment,conflict_resolution
             'phone' => 'required',
             'appointment_date' => 'required|date',
             'appointment_time' => 'required|date_format:H:i',
             'description' => 'nullable',
             'status' => 'required',
         ]);
-    
+
+        // return response()->json(['data', $validatedData]);
+        // $validatedData['status'] = 1;
+
         Appointment::create($validatedData);
     
         return response()->json(['message' => 'Appointment created successfully'], 200);
