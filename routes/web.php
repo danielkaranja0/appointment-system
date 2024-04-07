@@ -51,5 +51,8 @@ Route::get('/help', function () {
 
 Route::post('/appointments/store', [AppointmentController::class, 'store'])->name('appointments.store');
 
+Route::delete('/appointments/{id}', [AppointmentController::class, 'destroy']);
+
+
 
 

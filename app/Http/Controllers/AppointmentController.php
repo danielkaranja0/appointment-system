@@ -1,9 +1,9 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class AppointmentController extends Controller
 {
@@ -19,12 +19,15 @@ class AppointmentController extends Controller
             'status' => 'required',
         ]);
 
-        // return response()->json(['data', $validatedData]);
-        // $validatedData['status'] = 1;
-
         Appointment::create($validatedData);
-    
+
         return response()->json(['message' => 'Appointment created successfully'], 200);
     }
-    
+
+    public function destroy($id)
+    {
+        $appointment = Appointment::findOrFail($id);
+        $appointment->delete();
+        return response()->json(['message' => 'Appointment deleted successfully'], 200);
+    }
 }

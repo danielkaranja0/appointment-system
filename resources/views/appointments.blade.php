@@ -144,8 +144,8 @@
                             <td>{{ $appointment->status }}</td>
                             <td>
                                 <!-- Add actions/buttons here, e.g., Edit, Delete -->
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
+                                <button class="btn btn-primary edit-appointment" data-id="{{ $appointment->id }}">Edit</button>
+                                <button class="btn btn-danger delete-appointment" data-id="{{ $appointment->id }}">Delete</button>
                             </td>
                         </tr>
                         @endforeach
@@ -156,9 +156,28 @@
     </div>
 </div>
 
+<!-- Delete Appointment Modal -->
+<div class="modal fade" id="deleteAppointmentModal" tabindex="-1" aria-labelledby="deleteAppointmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteAppointmentModalLabel">Delete Appointment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this appointment?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Add event listener to the save button
+        // Add event listener for the save button
         document.getElementById('saveAppointmentBtn').addEventListener('click', function(e) {
             e.preventDefault();
             // Get form data
@@ -169,20 +188,50 @@
             // Send AJAX request to store the appointment
             fetch('{{ route("appointments.store") }}', {
                 method: 'POST',
-                body:formData,
+                body: formData,
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 }
             })
-            .then(response => response.json())
-            .then(data => {
-                // Handle success response
-                console.log(data.message);
-                location.reload(); // Reload the page to refresh the appointments table
-            })
-            .catch(error => {
-                // Handle error
-                console.log('Error:', error);
+                .then(response => response.json())
+                .then(data => {
+                    // Handle success response
+                    console.log(data.message);
+                    // location.reload(); // Reload the page to refresh the appointments table
+                })
+                .catch(error => {
+                    // Handle error
+                    console.log('Error:', error);
+                });
+        });
+
+        // Add event listener to the delete buttons
+        document.querySelectorAll('.delete-appointment').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const appointmentId = this.getAttribute('data-id');
+
+                // Send AJAX request to delete the appointment
+                fetch(`{{ url('/appointments') }}/${appointmentId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Handle success response
+                        console.log('Appointment deleted successfully');
+                        location.reload(); // Reload the page to refresh the appointments table
+                    } else {
+                        // Handle error response
+                        console.error('Error:', response.statusText);
+                    }
+                })
+                .catch(error => {
+                    // Handle network errors
+                    console.error('Error:', error);
+                });
             });
         });
     });
