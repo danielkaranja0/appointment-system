@@ -1,7 +1,9 @@
-@extends('layouts.app')
-
-@section('content')
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Appointments Calendar</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -41,20 +43,12 @@
         .calendar-table td:hover {
             background-color: #f0f0f0;
         }
-        .appointment-modal {
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-        }
-        .appointment-modal h3 {
-            margin-top: 0;
+        .appointment-title {
+            font-weight: bold;
         }
     </style>
-
+</head>
 <body>
-  
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     
     <div class="container-fluid">
         <div class="row">
@@ -152,6 +146,11 @@
 
             // Render calendar based on the selected year and month
             function renderCalendar(year, month) {
+                var appointments = [
+                    { title: 'Meeting', day: 2 }, // Example data, you need to replace this with your actual appointments
+                    { title: 'Conference', day: 10 },
+                    { title: 'Interview', day: 20 }
+                ];
                 var firstDayOfMonth = new Date(year, month - 1, 1).getDay(); // Day of the week (0 - Sunday, 1 - Monday, ..., 6 - Saturday)
                 var daysInMonth = new Date(year, month, 0).getDate();
                 var calendarHtml = `<table class="calendar-table">
@@ -176,7 +175,15 @@
                         } else if (day > daysInMonth) {
                             break;
                         } else {
-                            calendarHtml += `<td data-year="${year}" data-month="${month}" data-day="${day}">${day}</td>`;
+                            var appointment = appointments.find(appt => appt.day === day);
+                            if (appointment) {
+                                calendarHtml += `<td data-year="${year}" data-month="${month}" data-day="${day}">
+                                                    <span class="appointment-title">${appointment.title}</span><br>
+                                                    ${day}
+                                                </td>`;
+                            } else {
+                                calendarHtml += `<td data-year="${year}" data-month="${month}" data-day="${day}">${day}</td>`;
+                            }
                             day++;
                         }
                     }
@@ -192,34 +199,21 @@
                         var clickedYear = parseInt(this.getAttribute('data-year'));
                         var clickedMonth = parseInt(this.getAttribute('data-month'));
                         var clickedDay = parseInt(this.getAttribute('data-day'));
-                        showAppointmentModal(clickedYear, clickedMonth, clickedDay);
+                        var appointment = appointments.find(appt => appt.day === clickedDay);
+                        if (appointment) {
+                            showAppointmentModal(appointment);
+                        } else {
+                            console.log('No appointment for this day');
+                        }
                     });
                 });
             }
 
             // Function to show appointment modal for the selected day
-            function showAppointmentModal(year, month, day) {
-                var modalHtml = `<div class="appointment-modal">
-                                    <h3>Appointments for ${months[month - 1]} ${day}, ${year}</h3>
-                                    <!-- Add your appointment form here -->
-                                    <form>
-                                        <div class="mb-3">
-                                            <label for="appointment-title" class="form-label">Title</label>
-                                            <input type="text" class="form-control" id="appointment-title" placeholder="Enter appointment title">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="appointment-time" class="form-label">Time</label>
-                                            <input type="time" class="form-control" id="appointment-time">
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Add Appointment</button>
-                                    </form>
-                                </div>`;
-                // Display modal
-                var modal = new bootstrap.Modal(document.body.appendChild(document.createElement('div')));
-                modal.setContent(modalHtml);
-                modal.show();
+            function showAppointmentModal(appointment) {
+                alert(`Appointment: ${appointment.title}\nDate: ${appointment.day}`);
             }
         });
     </script>
-
 </body>
+</html>
