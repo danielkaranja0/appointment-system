@@ -27,6 +27,7 @@
         .calendar-table {
             width: 100%;
             border-collapse: collapse;
+            margin-top: 20px;
         }
         .calendar-table th {
             padding: 10px;
@@ -39,12 +40,25 @@
             text-align: center;
             border: 1px solid #ccc;
             cursor: pointer;
+            position: relative;
         }
         .calendar-table td:hover {
             background-color: #f0f0f0;
         }
-        .appointment-title {
-            font-weight: bold;
+        .appointment {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 123, 255, 0.8);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            display: none;
+        }
+        .calendar-table td:hover .appointment {
+            display: block;
         }
     </style>
 </head>
@@ -146,11 +160,6 @@
 
             // Render calendar based on the selected year and month
             function renderCalendar(year, month) {
-                var appointments = [
-                    { title: 'Meeting', day: 2 }, // Example data, you need to replace this with your actual appointments
-                    { title: 'Conference', day: 10 },
-                    { title: 'Interview', day: 20 }
-                ];
                 var firstDayOfMonth = new Date(year, month - 1, 1).getDay(); // Day of the week (0 - Sunday, 1 - Monday, ..., 6 - Saturday)
                 var daysInMonth = new Date(year, month, 0).getDate();
                 var calendarHtml = `<table class="calendar-table">
@@ -175,15 +184,7 @@
                         } else if (day > daysInMonth) {
                             break;
                         } else {
-                            var appointment = appointments.find(appt => appt.day === day);
-                            if (appointment) {
-                                calendarHtml += `<td data-year="${year}" data-month="${month}" data-day="${day}">
-                                                    <span class="appointment-title">${appointment.title}</span><br>
-                                                    ${day}
-                                                </td>`;
-                            } else {
-                                calendarHtml += `<td data-year="${year}" data-month="${month}" data-day="${day}">${day}</td>`;
-                            }
+                            calendarHtml += `<td>${day}</td>`;
                             day++;
                         }
                     }
@@ -191,27 +192,6 @@
                 }
                 calendarHtml += '</tbody></table>';
                 calendarEl.innerHTML = calendarHtml;
-
-                // Add event listeners to each day cell
-                var dayCells = document.querySelectorAll('.calendar-table td');
-                dayCells.forEach(function(cell) {
-                    cell.addEventListener('click', function() {
-                        var clickedYear = parseInt(this.getAttribute('data-year'));
-                        var clickedMonth = parseInt(this.getAttribute('data-month'));
-                        var clickedDay = parseInt(this.getAttribute('data-day'));
-                        var appointment = appointments.find(appt => appt.day === clickedDay);
-                        if (appointment) {
-                            showAppointmentModal(appointment);
-                        } else {
-                            console.log('No appointment for this day');
-                        }
-                    });
-                });
-            }
-
-            // Function to show appointment modal for the selected day
-            function showAppointmentModal(appointment) {
-                alert(`Appointment: ${appointment.title}\nDate: ${appointment.day}`);
             }
         });
     </script>

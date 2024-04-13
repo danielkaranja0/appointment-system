@@ -144,13 +144,83 @@
                             <td>{{ $appointment->status }}</td>
                             <td>
                                 <!-- Add actions/buttons here, e.g., Edit, Delete -->
-                                <button class="btn btn-primary edit-appointment" data-id="{{ $appointment->id }}">Edit</button>
+                                <button class="btn btn-primary edit-appointment" data-id="{{ $appointment->id }}" data-bs-toggle="modal" data-bs-target="#editAppointmentModal">Edit</button>
                                 <button class="btn btn-danger delete-appointment" data-id="{{ $appointment->id }}">Delete</button>
                             </td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Appointment Modal -->
+<div class="modal fade" id="editAppointmentModal" tabindex="-1" aria-labelledby="editAppointmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editAppointmentModalLabel">Edit Appointment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Edit appointment form -->
+                
+                <form id="editAppointmentForm" action="{{ route('appointments.update', ['id' => $appointment->id]) }}" method="POST">
+                    @csrf
+                    <!-- Appointment Name -->
+                    <div class="mb-3">
+                        <label for="editAppointmentName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="editAppointmentName" name="name" value="{{ $appointment->name }}" required>
+                    </div>
+                    <!-- Appointment Category -->
+                    <div class="mb-3">
+                        <label for="editAppointmentCategory" class="form-label">Category</label>
+                        <select class="form-select" id="editAppointmentCategory" name="category" required>
+                            <!-- Populate options dynamically based on appointment category -->
+                            <option value="staff_appointment" {{ $appointment->category == 'staff_appointment' ? 'selected' : '' }}>Staff Appointment</option>
+                            <option value="business_consultation" {{ $appointment->category == 'business_consultation' ? 'selected' : '' }}>Business Consultation</option>
+                            <option value="business_appointment" {{ $appointment->category == 'business_appointment' ? 'selected' : '' }}>Business Appointment</option>
+                            <option value="conflict_resolution" {{ $appointment->category == 'conflict_resolution' ? 'selected' : '' }}>Conflict Resolution</option>
+                        </select>
+                    </div>
+                    <!-- Phone Number -->
+                    <div class="mb-3">
+                        <label for="editAppointmentPhone" class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="editAppointmentPhone" name="phone" value="{{ $appointment->phone }}" required>
+                    </div>
+                    <!-- Appointment Date -->
+                    <div class="mb-3">
+                        <label for="editAppointmentDate" class="form-label">Appointment Date</label>
+                        <input type="date" class="form-control" id="editAppointmentDate" name="appointment_date" value="{{ $appointment->appointment_date }}" required>
+                    </div>
+                    <!-- Appointment Time -->
+                    <div class="mb-3">
+                        <label for="editAppointmentTime" class="form-label">Appointment Time</label>
+                        <input type="time" class="form-control" id="editAppointmentTime" name="appointment_time" value="{{ $appointment->appointment_time }}" required>
+                    </div>
+                    <!-- Description -->
+                    <div class="mb-3">
+                        <label for="editAppointmentDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="editAppointmentDescription" name="description" required>{{ $appointment->description }}</textarea>
+                    </div>
+                    <!-- Appointment Status -->
+                    <div class="mb-3">
+                        <label for="editAppointmentStatus" class="form-label">Status</label>
+                        <select class="form-select" id="editAppointmentStatus" name="status" required>
+                            <option value="accepted" {{ $appointment->status == 'accepted' ? 'selected' : '' }}>Accepted</option>
+                            <option value="rejected" {{ $appointment->status == 'rejected' ? 'selected' : '' }}>Rejected</option>
+                            <option value="rescheduled" {{ $appointment->status == 'rescheduled' ? 'selected' : '' }}>Rescheduled</option>
+                        </select>
+                    </div>
+                    <!-- Hidden input for appointment ID -->
+                    <input type="hidden" id="editAppointmentId" name="appointment_id" value="{{ $appointment->id }}">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="updateAppointmentBtn">Update</button>
             </div>
         </div>
     </div>
@@ -183,7 +253,6 @@
             // Get form data
             const formData = new FormData(document.getElementById('addAppointmentForm'));
             formData.set('name', document.querySelector('#appointmentName').value);
-            console.log(formData.entries());
 
             // Send AJAX request to store the appointment
             fetch('{{ route("appointments.store") }}', {
@@ -229,9 +298,35 @@
                     }
                 })
                 .catch(error => {
-                    // Handle network errors
+                    // Handle network error
                     console.error('Error:', error);
                 });
+            });
+        });
+
+        // Add event listener to the update button in the edit modal
+        document.getElementById('updateAppointmentBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            const appointmentId = document.getElementById('editAppointmentId').value;
+            const formData = new FormData(document.getElementById('editAppointmentForm'));
+
+            // Send AJAX request to update the appointment
+            fetch(`{{ url('/appointments') }}/${appointmentId}`, {
+                method: 'PUT',
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle success response
+                console.log(data.message);
+                // location.reload(); // Reload the page to refresh the appointments table
+            })
+            .catch(error => {
+                // Handle error
+                console.error('Error:', error);
             });
         });
     });

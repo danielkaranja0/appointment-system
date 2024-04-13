@@ -45,14 +45,15 @@ Route::get('/help', function () {
     return view('help');
 });
 
-// routes/web.php
-
-
-
 Route::post('/appointments/store', [AppointmentController::class, 'store'])->name('appointments.store');
 
 Route::delete('/appointments/{id}', [AppointmentController::class, 'destroy']);
 
+Route::get('/appointments/{id}/edit', [AppointmentController::class, 'edit'])->name('appointments.edit');
+
+
+
+Route::put('/appointments/{id}', [AppointmentController::class, 'update'])->name('appointments.update');
 
 
 
