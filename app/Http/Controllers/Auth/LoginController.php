@@ -4,36 +4,36 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
     protected $redirectTo = '/home';
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
     }
-}
+
+    protected function authenticated(Request $request, $user)
+    {
+        // Customize the welcome message based on the user's role
+        $welcomeMessage = 'Welcome back';
+        if ($user->role === 'ceo') {
+            $welcomeMessage .= ' CEO';
+        } elseif ($user->role === 'manager') {
+            $welcomeMessage .= ' Manager';
+        } elseif ($user->role === 'secretary') {
+            $welcomeMessage .= ' Secretary';
+        }
+    
+        // Append the user's name to the welcome message
+        $welcomeMessage .= ', ' . $user->name;
+    
+        // Flash the welcome message to the session
+        $request->session()->flash('status', $welcomeMessage);
+    }
+}    

@@ -99,9 +99,7 @@
                                     <div class="mb-3">
                                         <label for="appointmentStatus" class="form-label">Status</label>
                                         <select class="form-select" id="appointmentStatus" name="status" required>
-                                            <option value="accepted">Accepted</option>
-                                            <option value="rejected">Rejected</option>
-                                            <option value="rescheduled">Rescheduled</option>
+                                            <option value="pending_approval">Pending Approval</option>
                                         </select>
                                     </div>
                                 </form>
@@ -167,55 +165,54 @@
             <div class="modal-body">
                 <!-- Edit appointment form -->
                 
-                <form id="editAppointmentForm" action="{{ route('appointments.update', ['id' => $appointment->id]) }}" method="POST">
+                <form id="editAppointmentForm">
                     @csrf
                     <!-- Appointment Name -->
                     <div class="mb-3">
                         <label for="editAppointmentName" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="editAppointmentName" name="name" value="{{ $appointment->name }}" required>
+                        <input type="text" class="form-control" id="editAppointmentName" name="name" required>
                     </div>
                     <!-- Appointment Category -->
                     <div class="mb-3">
                         <label for="editAppointmentCategory" class="form-label">Category</label>
                         <select class="form-select" id="editAppointmentCategory" name="category" required>
-                            <!-- Populate options dynamically based on appointment category -->
-                            <option value="staff_appointment" {{ $appointment->category == 'staff_appointment' ? 'selected' : '' }}>Staff Appointment</option>
-                            <option value="business_consultation" {{ $appointment->category == 'business_consultation' ? 'selected' : '' }}>Business Consultation</option>
-                            <option value="business_appointment" {{ $appointment->category == 'business_appointment' ? 'selected' : '' }}>Business Appointment</option>
-                            <option value="conflict_resolution" {{ $appointment->category == 'conflict_resolution' ? 'selected' : '' }}>Conflict Resolution</option>
+                            <option value="staff_appointment">Staff Appointment</option>
+                            <option value="business_consultation">Business Consultation</option>
+                            <option value="business_appointment">Business Appointment</option>
+                            <option value="conflict_resolution">Conflict Resolution</option>
                         </select>
                     </div>
                     <!-- Phone Number -->
                     <div class="mb-3">
                         <label for="editAppointmentPhone" class="form-label">Phone Number</label>
-                        <input type="tel" class="form-control" id="editAppointmentPhone" name="phone" value="{{ $appointment->phone }}" required>
+                        <input type="tel" class="form-control" id="editAppointmentPhone" name="phone" required>
                     </div>
                     <!-- Appointment Date -->
                     <div class="mb-3">
                         <label for="editAppointmentDate" class="form-label">Appointment Date</label>
-                        <input type="date" class="form-control" id="editAppointmentDate" name="appointment_date" value="{{ $appointment->appointment_date }}" required>
+                        <input type="date" class="form-control" id="editAppointmentDate" name="appointment_date" required>
                     </div>
                     <!-- Appointment Time -->
                     <div class="mb-3">
                         <label for="editAppointmentTime" class="form-label">Appointment Time</label>
-                        <input type="time" class="form-control" id="editAppointmentTime" name="appointment_time" value="{{ $appointment->appointment_time }}" required>
+                        <input type="time" class="form-control" id="editAppointmentTime" name="appointment_time" required>
                     </div>
                     <!-- Description -->
                     <div class="mb-3">
                         <label for="editAppointmentDescription" class="form-label">Description</label>
-                        <textarea class="form-control" id="editAppointmentDescription" name="description" required>{{ $appointment->description }}</textarea>
+                        <textarea class="form-control" id="editAppointmentDescription" name="description" required></textarea>
                     </div>
                     <!-- Appointment Status -->
                     <div class="mb-3">
                         <label for="editAppointmentStatus" class="form-label">Status</label>
                         <select class="form-select" id="editAppointmentStatus" name="status" required>
-                            <option value="accepted" {{ $appointment->status == 'accepted' ? 'selected' : '' }}>Accepted</option>
-                            <option value="rejected" {{ $appointment->status == 'rejected' ? 'selected' : '' }}>Rejected</option>
-                            <option value="rescheduled" {{ $appointment->status == 'rescheduled' ? 'selected' : '' }}>Rescheduled</option>
+                            <option value="accepted">Accepted</option>
+                            <option value="rejected">Rejected</option>
+                            <option value="rescheduled">Rescheduled</option>
                         </select>
                     </div>
                     <!-- Hidden input for appointment ID -->
-                    <input type="hidden" id="editAppointmentId" name="appointment_id" value="{{ $appointment->id }}">
+                    <input type="hidden" id="editAppointmentId" name="appointment_id">
                 </form>
             </div>
             <div class="modal-footer">
@@ -252,7 +249,6 @@
             e.preventDefault();
             // Get form data
             const formData = new FormData(document.getElementById('addAppointmentForm'));
-            formData.set('name', document.querySelector('#appointmentName').value);
 
             // Send AJAX request to store the appointment
             fetch('{{ route("appointments.store") }}', {

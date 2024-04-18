@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AppointmentController extends Controller
 {
     public function store(Request $request)
     {
+        // Validate the incoming request data
         $validatedData = $request->validate([
             'name' => 'required',
             'category' => 'required', //in:staff_appointment,business_consultation,business_appointment,conflict_resolution
@@ -16,11 +18,21 @@ class AppointmentController extends Controller
             'appointment_date' => 'required|date',
             'appointment_time' => 'required|date_format:H:i',
             'description' => 'nullable',
-            'status' => 'required',
+            // Remove 'status' validation as it will be set automatically
         ]);
 
+        // Determine the default status based on the user's role
+        $defaultStatus = Auth::user()->role === 'secretary' || Auth::user()->role === 'manager' 
+            ? 'pending approval' 
+            : 'approved';
+
+        // Add the default status to the validated data
+        $validatedData['status'] = $defaultStatus;
+
+        // Create the appointment with the validated data
         Appointment::create($validatedData);
 
+        // Return a success response
         return response()->json(['message' => 'Appointment created successfully'], 200);
     }
 
@@ -30,12 +42,6 @@ class AppointmentController extends Controller
         $appointment->delete();
         return response()->json(['message' => 'Appointment deleted successfully'], 200);
     }
-    // public function index()
-    // {
-    //     $appointments = Appointment::all();
-    //     Log::info($appointments); // Log the retrieved appointments
-    //     return view('calendar', compact('appointments'));
-    // }
 
     public function edit($id)
     {
@@ -45,8 +51,6 @@ class AppointmentController extends Controller
         // Pass the appointment data to the view for editing
         return view('edit-appointment', compact('appointment'));
     }
-    
-
 
     public function update(Request $request, $id)
     {
@@ -70,5 +74,4 @@ class AppointmentController extends Controller
         // Return a success response
         return response()->json(['message' => 'Appointment updated successfully']);
     }
-    
 }

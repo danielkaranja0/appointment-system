@@ -4,6 +4,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 <div class="container-fluid">
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
     <div class="row">
         <!-- Sidebar -->
         <nav class="col-md-2 col-sm-3 bg-light sidebar">
@@ -16,12 +21,22 @@
                             <span class="text-dark">Appointments</span> <span class="sr-only">(current)</span>
                         </a>
                     </li>
+                    @if(Auth::user()->role === 'secretary' || Auth::user()->role === 'manager')
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-plus-circle mr-2 text-dark"></i>
+                            <span class="text-dark">Add Appointment</span>
+                        </a>
+                    </li>
+                    @endif
+                    @if(Auth::user()->role === 'admin')
                     <li class="nav-item">
                         <a class="nav-link"  href="{{ url('/users') }}">
                             <i class="fas fa-users mr-2 text-dark"></i>
                             <span class="text-dark">Users</span>
                         </a>
                     </li>
+                    @endif
                     <li class="nav-item">
                         <a class="nav-link"  href="{{ url('/calendar') }}">
                             <i class="fas fa-calendar mr-2 text-dark"></i>
