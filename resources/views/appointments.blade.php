@@ -96,12 +96,7 @@
                                         <textarea class="form-control" id="appointmentDescription" name="description" placeholder="Enter description"></textarea>
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label for="appointmentStatus" class="form-label">Status</label>
-                                        <select class="form-select" id="appointmentStatus" name="status" required>
-                                            <option value="pending_approval">Pending Approval</option>
-                                        </select>
-                                    </div>
+                                    <!-- No status field for adding appointment -->
                                 </form>
                             </div>
                             <div class="modal-footer">
@@ -138,12 +133,16 @@
                             <td>{{ $appointment->phone }}</td>
                             <td>{{ $appointment->appointment_date }}</td>
                             <td>{{ $appointment->appointment_time }}</td>
-                            <td>{{ $appointment->description }}</td>
                             <td>{{ $appointment->status }}</td>
+                            <td>{{ $appointment->description }}</td>
                             <td>
-                                <!-- Add actions/buttons here, e.g., Edit, Delete -->
+                                <!-- Add actions/buttons here, e.g., Edit, Delete, Approve, Reject, Reschedule, Refer -->
                                 <button class="btn btn-primary edit-appointment" data-id="{{ $appointment->id }}" data-bs-toggle="modal" data-bs-target="#editAppointmentModal">Edit</button>
                                 <button class="btn btn-danger delete-appointment" data-id="{{ $appointment->id }}">Delete</button>
+                                <button class="btn btn-success approve-appointment" data-id="{{ $appointment->id }}">Approve</button>
+                                <button class="btn btn-warning reject-appointment" data-id="{{ $appointment->id }}">Reject</button>
+                                <button class="btn btn-info reschedule-appointment" data-id="{{ $appointment->id }}" data-bs-toggle="modal" data-bs-target="#editAppointmentModal">Reschedule</button>
+                                <button class="btn btn-info refer-appointment" data-id="{{ $appointment->id }}" data-bs-toggle="modal" data-bs-target="#referAppointmentModal">Refer</button>
                             </td>
                         </tr>
                         @endforeach
@@ -223,20 +222,21 @@
     </div>
 </div>
 
-<!-- Delete Appointment Modal -->
-<div class="modal fade" id="deleteAppointmentModal" tabindex="-1" aria-labelledby="deleteAppointmentModalLabel" aria-hidden="true">
+<!-- Refer Appointment Modal -->
+<div class="modal fade" id="referAppointmentModal" tabindex="-1" aria-labelledby="referAppointmentModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteAppointmentModalLabel">Delete Appointment</h5>
+                <h5 class="modal-title" id="referAppointmentModalLabel">Refer Appointment</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Are you sure you want to delete this appointment?</p>
+                <p>Enter the mobile number to refer the appointment:</p>
+                <input type="tel" id="referralPhoneNumber" class="form-control" placeholder="Enter mobile number">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+                <button type="button" class="btn btn-primary" id="referAppointmentBtn">Refer</button>
             </div>
         </div>
     </div>
@@ -270,7 +270,37 @@
                 });
         });
 
-        // Add event listener to the delete buttons
+        // Event listener for the edit buttons
+        document.querySelectorAll('.edit-appointment').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const appointmentId = this.getAttribute('data-id');
+
+                // Fetch appointment details
+                fetch(`{{ url('/appointments') }}/${appointmentId}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Populate the edit modal with appointment details
+                    document.getElementById('editAppointmentId').value = data.id;
+                    document.getElementById('editAppointmentName').value = data.name;
+                    document.getElementById('editAppointmentCategory').value = data.category;
+                    document.getElementById('editAppointmentPhone').value = data.phone;
+                    document.getElementById('editAppointmentDate').value = data.appointment_date;
+                    document.getElementById('editAppointmentTime').value = data.appointment_time;
+                    document.getElementById('editAppointmentDescription').value = data.description;
+                    document.getElementById('editAppointmentStatus').value = data.status;
+
+                    // Show the edit modal
+                    const editModal = new bootstrap.Modal(document.getElementById('editAppointmentModal'));
+                    editModal.show();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            });
+        });
+
+        // Event listener for the delete buttons
         document.querySelectorAll('.delete-appointment').forEach(button => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -300,7 +330,7 @@
             });
         });
 
-        // Add event listener to the update button in the edit modal
+        // Event listener for the update button in the edit modal
         document.getElementById('updateAppointmentBtn').addEventListener('click', function(e) {
             e.preventDefault();
             const appointmentId = document.getElementById('editAppointmentId').value;
@@ -325,6 +355,120 @@
                 console.error('Error:', error);
             });
         });
+
+        // Event listener for the refer button in the refer modal
+        document.getElementById('referAppointmentBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            const appointmentId = document.getElementById('editAppointmentId').value;
+            const referralPhoneNumber = document.getElementById('referralPhoneNumber').value;
+
+            // Send referral request
+            fetch(`{{ url('/appointments') }}/${appointmentId}/refer`, {
+                method: 'POST',
+                body: JSON.stringify({ phone: referralPhoneNumber }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle success response
+                console.log(data.message);
+                // Close the modal
+                const referModal = bootstrap.Modal.getInstance(document.getElementById('referAppointmentModal'));
+                referModal.hide();
+            })
+            .catch(error => {
+                // Handle error
+                console.error('Error:', error);
+            });
+        });
+
+        // Event listener for the approve buttons
+        document.querySelectorAll('.approve-appointment').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const appointmentId = this.getAttribute('data-id');
+
+                // Send AJAX request to approve the appointment
+                fetch(`{{ url('/appointments') }}/${appointmentId}/approve`, {
+                    method: 'PUT',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Handle success response
+                    console.log(data.message);
+                    // Reload the page to refresh the appointments table
+                    location.reload();
+                })
+                .catch(error => {
+                    // Handle error
+                    console.error('Error:', error);
+                });
+            });
+        });
+
+        // Event listener for the reject buttons
+        document.querySelectorAll('.reject-appointment').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const appointmentId = this.getAttribute('data-id');
+
+                // Send AJAX request to reject the appointment
+                fetch(`{{ url('/appointments') }}/${appointmentId}/reject`, {
+                    method: 'PUT',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Handle success response
+                    console.log(data.message);
+                    // Reload the page to refresh the appointments table
+                    location.reload();
+                })
+                .catch(error => {
+                    // Handle error
+                    console.error('Error:', error);
+                });
+            });
+        });
+
+       // Event listener for the reschedule buttons
+document.querySelectorAll('.reschedule-appointment').forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const appointmentId = this.getAttribute('data-id');
+
+        // Fetch appointment details
+        fetch(`{{ url('/appointments') }}/${appointmentId}`)
+        .then(response => response.json())
+        .then(data => {
+            // Populate the edit modal with appointment details
+            document.getElementById('editAppointmentId').value = data.id;
+            document.getElementById('editAppointmentName').value = data.name;
+            document.getElementById('editAppointmentCategory').value = data.category;
+            document.getElementById('editAppointmentPhone').value = data.phone;
+            document.getElementById('editAppointmentDate').value = data.appointment_date;
+            document.getElementById('editAppointmentTime').value = data.appointment_time;
+            document.getElementById('editAppointmentDescription').value = data.description;
+
+            // Change the modal title
+            document.getElementById('editAppointmentModalLabel').textContent = 'Reschedule Appointment';
+
+            // Show the edit modal
+            const editModal = new bootstrap.Modal(document.getElementById('editAppointmentModal'));
+            editModal.show();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
     });
+});
 </script>
 @endsection
