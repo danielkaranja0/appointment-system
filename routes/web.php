@@ -47,12 +47,21 @@ Route::get('/help', function () {
 
 Route::post('/appointments/store', [AppointmentController::class, 'store'])->name('appointments.store');
 
-Route::delete('/appointments/{id}', [AppointmentController::class, 'destroy']);
 
 Route::get('/appointments/{id}/edit', [AppointmentController::class, 'edit'])->name('appointments.edit');
 
 
+
+
+
+Route::delete('/appointments/{id}', [AppointmentController::class, 'destroy']);
+
+
+Route::put('/appointments/{id}/approve', [AppointmentController::class, 'approve'])->name('appointments.approve');
+Route::put('/appointments/{id}/reject', [AppointmentController::class, 'reject'])->name('appointments.reject');
+
+Route::get('/appointments/{id}', [AppointmentController::class, 'show'])->name('appointments.show');
+
 Route::put('/appointments/{id}', [AppointmentController::class, 'update'])->name('appointments.update');
 
-
-
+Route::put('/appointments/{id}/reschedule', [AppointmentController::class, 'reschedule'])->name('appointments.reschedule');
