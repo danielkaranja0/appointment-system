@@ -136,8 +136,7 @@
                             <td>{{ $appointment->status }}</td>
                             <td>{{ $appointment->description }}</td>
                             <td>
-                                <!-- Add actions/buttons here, e.g., Edit, Delete, Approve, Reject, Reschedule, Refer -->
-                                <button class="btn btn-primary edit-appointment" data-id="{{ $appointment->id }}" data-bs-toggle="modal" data-bs-target="#editAppointmentModal">Edit</button>
+                                <!-- Add actions/buttons here, e.g., Delete, Approve, Reject, Reschedule, Refer -->
                                 <button class="btn btn-danger delete-appointment" data-id="{{ $appointment->id }}">Delete</button>
                                 <button class="btn btn-success approve-appointment" data-id="{{ $appointment->id }}">Approve</button>
                                 <button class="btn btn-warning reject-appointment" data-id="{{ $appointment->id }}">Reject</button>
@@ -158,7 +157,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editAppointmentModalLabel">Edit Appointment</h5>
+                <h5 class="modal-title" id="editAppointmentModalLabel">Reschedule Appointment</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -262,6 +261,7 @@
                 .then(data => {
                     // Handle success response
                     console.log(data.message);
+                    location.reload();
                     // location.reload(); // Reload the page to refresh the appointments table
                 })
                 .catch(error => {
@@ -269,66 +269,115 @@
                     console.log('Error:', error);
                 });
         });
+//reject 
+document.querySelectorAll('.reject-appointment').forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const appointmentId = this.getAttribute('data-id');
 
-        // Event listener for the edit buttons
-        document.querySelectorAll('.edit-appointment').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                const appointmentId = this.getAttribute('data-id');
-
-                // Fetch appointment details
-                fetch(`{{ url('/appointments') }}/${appointmentId}`)
-                .then(response => response.json())
-                .then(data => {
-                    // Populate the edit modal with appointment details
-                    document.getElementById('editAppointmentId').value = data.id;
-                    document.getElementById('editAppointmentName').value = data.name;
-                    document.getElementById('editAppointmentCategory').value = data.category;
-                    document.getElementById('editAppointmentPhone').value = data.phone;
-                    document.getElementById('editAppointmentDate').value = data.appointment_date;
-                    document.getElementById('editAppointmentTime').value = data.appointment_time;
-                    document.getElementById('editAppointmentDescription').value = data.description;
-                    document.getElementById('editAppointmentStatus').value = data.status;
-
-                    // Show the edit modal
-                    const editModal = new bootstrap.Modal(document.getElementById('editAppointmentModal'));
-                    editModal.show();
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-            });
+        // Send AJAX request to reject the appointment
+        fetch(`/appointments/${appointmentId}/reject`, {
+            method: 'PUT',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Handle success response
+            console.log(data.message);
+            location.reload();
+            // Reload the page or update the status in the UI as needed
+        })
+        .catch(error => {
+            // Handle error
+            console.error('Error:', error);
         });
+    });
+});
+// Event listener for the reschedule buttons
+document.querySelectorAll('.reschedule-appointment').forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const appointmentId = this.getAttribute('data-id');
 
-        // Event listener for the delete buttons
-        document.querySelectorAll('.delete-appointment').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                const appointmentId = this.getAttribute('data-id');
+        // Fetch appointment details
+        fetch(`/appointments/${appointmentId}`)
+        .then(response => response.json())
+        .then(data => {
+            // Populate the edit modal with appointment details
+            document.getElementById('editAppointmentId').value = data.id;
+            document.getElementById('editAppointmentName').value = data.name;
+            document.getElementById('editAppointmentCategory').value = data.category;
+            document.getElementById('editAppointmentPhone').value = data.phone;
+            document.getElementById('editAppointmentDate').value = data.appointment_date;
+            document.getElementById('editAppointmentTime').value = data.appointment_time;
+            document.getElementById('editAppointmentDescription').value = data.description;
+            document.getElementById('editAppointmentStatus').value = data.status;
 
-                // Send AJAX request to delete the appointment
-                fetch(`{{ url('/appointments') }}/${appointmentId}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    }
-                })
-                .then(response => {
-                    if (response.ok) {
-                        // Handle success response
-                        console.log('Appointment deleted successfully');
-                        location.reload(); // Reload the page to refresh the appointments table
-                    } else {
-                        // Handle error response
-                        console.error('Error:', response.statusText);
-                    }
-                })
-                .catch(error => {
-                    // Handle network error
-                    console.error('Error:', error);
-                });
-            });
+            // Show the edit modal
+            const editModal = new bootstrap.Modal(document.getElementById('editAppointmentModal'));
+            editModal.show();
+        })
+        .catch(error => {
+            console.error('Error:', error);
         });
+    });
+});
+
+        document.querySelectorAll('.approve-appointment').forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const appointmentId = this.getAttribute('data-id');
+
+        // Send AJAX request to approve the appointment
+        fetch(`/appointments/${appointmentId}/approve`, {
+            method: 'PUT',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Handle success response
+            console.log(data.message);
+            location.reload();
+            // Reload the page or update the status in the UI as needed
+        })
+        .catch(error => {
+            // Handle error
+            console.error('Error:', error);
+        });
+    });
+});
+//delete event listener
+document.querySelectorAll('.delete-appointment').forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const appointmentId = this.getAttribute('data-id');
+
+        // Send AJAX request to delete the appointment
+        fetch(`/appointments/${appointmentId}`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Handle success response
+            console.log(data.message);
+            // Reload the page
+            location.reload();
+        })
+        .catch(error => {
+            // Handle error
+            console.error('Error:', error);
+        });
+    });
+});
+
+
 
         // Event listener for the update button in the edit modal
         document.getElementById('updateAppointmentBtn').addEventListener('click', function(e) {
@@ -348,127 +397,13 @@
             .then(data => {
                 // Handle success response
                 console.log(data.message);
-                // location.reload(); // Reload the page to refresh the appointments table
+                location.reload(); // Reload the page to refresh the appointments table
             })
             .catch(error => {
                 // Handle error
                 console.error('Error:', error);
             });
-        });
-
-        // Event listener for the refer button in the refer modal
-        document.getElementById('referAppointmentBtn').addEventListener('click', function(e) {
-            e.preventDefault();
-            const appointmentId = document.getElementById('editAppointmentId').value;
-            const referralPhoneNumber = document.getElementById('referralPhoneNumber').value;
-
-            // Send referral request
-            fetch(`{{ url('/appointments') }}/${appointmentId}/refer`, {
-                method: 'POST',
-                body: JSON.stringify({ phone: referralPhoneNumber }),
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Handle success response
-                console.log(data.message);
-                // Close the modal
-                const referModal = bootstrap.Modal.getInstance(document.getElementById('referAppointmentModal'));
-                referModal.hide();
-            })
-            .catch(error => {
-                // Handle error
-                console.error('Error:', error);
-            });
-        });
-
-        // Event listener for the approve buttons
-        document.querySelectorAll('.approve-appointment').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                const appointmentId = this.getAttribute('data-id');
-
-                // Send AJAX request to approve the appointment
-                fetch(`{{ url('/appointments') }}/${appointmentId}/approve`, {
-                    method: 'PUT',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    // Handle success response
-                    console.log(data.message);
-                    // Reload the page to refresh the appointments table
-                    location.reload();
-                })
-                .catch(error => {
-                    // Handle error
-                    console.error('Error:', error);
-                });
-            });
-        });
-
-        // Event listener for the reject buttons
-        document.querySelectorAll('.reject-appointment').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                const appointmentId = this.getAttribute('data-id');
-
-                // Send AJAX request to reject the appointment
-                fetch(`{{ url('/appointments') }}/${appointmentId}/reject`, {
-                    method: 'PUT',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    // Handle success response
-                    console.log(data.message);
-                    // Reload the page to refresh the appointments table
-                    location.reload();
-                })
-                .catch(error => {
-                    // Handle error
-                    console.error('Error:', error);
-                });
-            });
-        });
-
-       // Event listener for the reschedule buttons
-document.querySelectorAll('.reschedule-appointment').forEach(button => {
-    button.addEventListener('click', function(e) {
-        e.preventDefault();
-        const appointmentId = this.getAttribute('data-id');
-
-        // Fetch appointment details
-        fetch(`{{ url('/appointments') }}/${appointmentId}`)
-        .then(response => response.json())
-        .then(data => {
-            // Populate the edit modal with appointment details
-            document.getElementById('editAppointmentId').value = data.id;
-            document.getElementById('editAppointmentName').value = data.name;
-            document.getElementById('editAppointmentCategory').value = data.category;
-            document.getElementById('editAppointmentPhone').value = data.phone;
-            document.getElementById('editAppointmentDate').value = data.appointment_date;
-            document.getElementById('editAppointmentTime').value = data.appointment_time;
-            document.getElementById('editAppointmentDescription').value = data.description;
-
-            // Change the modal title
-            document.getElementById('editAppointmentModalLabel').textContent = 'Reschedule Appointment';
-
-            // Show the edit modal
-            const editModal = new bootstrap.Modal(document.getElementById('editAppointmentModal'));
-            editModal.show();
-        })
-        .catch(error => {
-            console.error('Error:', error);
         });
     });
-});
 </script>
 @endsection
