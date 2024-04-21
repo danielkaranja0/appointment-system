@@ -51,7 +51,6 @@ class AppointmentController extends Controller
         // Pass the appointment data to the view for editing
         return view('edit-appointment', compact('appointment'));
     }
-
     public function update(Request $request, $id)
     {
         // Validate the request data
@@ -74,4 +73,66 @@ class AppointmentController extends Controller
         // Return a success response
         return response()->json(['message' => 'Appointment updated successfully']);
     }
+
+
+    public function reschedule(Request $request, $id)
+    {
+        // Validate the request data for rescheduling
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
+            'phone' => 'required|string|max:255',
+            'appointment_date' => 'required|date',
+            'appointment_time' => 'required|string|max:255',
+            'description' => 'nullable|string',
+        ]);
+    
+        // Find the appointment by ID
+        $appointment = Appointment::findOrFail($id);
+    
+        // Update the appointment with the validated data
+        $appointment->update($validatedData);
+    
+        // Return a success response
+        return response()->json(['message' => 'Appointment rescheduled successfully']);
+    }
+    
+
+    
+
+
+
+
+
+
+    public function approve($id)
+{
+    // Find the appointment by ID
+    $appointment = Appointment::findOrFail($id);
+
+    // Update the status to 'approved'
+    $appointment->update(['status' => 'approved']);
+
+    // Return a success response
+    return response()->json(['message' => 'Appointment approved successfully']);
+}
+
+public function reject($id)
+{
+    // Find the appointment by ID
+    $appointment = Appointment::findOrFail($id);
+
+    // Update the status to 'rejected'
+    $appointment->update(['status' => 'rejected']);
+
+    // Return a success response
+    return response()->json(['message' => 'Appointment rejected successfully']);
+}
+public function show($id)
+{
+    $appointment = Appointment::findOrFail($id);
+    return response()->json($appointment);
+}
+
+
 }
