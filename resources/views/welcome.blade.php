@@ -148,7 +148,8 @@
     <div class="container section-content">
         <img src="https://via.placeholder.com/400x300" alt="Image" class="img-fluid">
         <div class="text">
-            <h2>Section Title</h2>
+            <p>EXTREMELY FLEXIBLE</p>
+            <h2>Work smarter with <br/>powerful features</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut urna non felis aliquam accumsan. Duis eu lacus nec nisl hendrerit feugiat. Nulla facilisi. Vivamus consectetur libero in mi fermentum, ac fringilla mi sagittis.</p>
         </div>
     </div>
@@ -166,7 +167,7 @@
             <li>Comprehensive reporting and analytics tools for tracking appointment metrics.</li>
         </ul>
     </div>
-    <img src="https://via.placeholder.com/400x300" alt="Image" class="img-fluid">
+    <img src="https://media.istockphoto.com/id/1469836298/photo/megaphone-and-save-the-date-message-on-speech-bubble.webp?b=1&s=170667a&w=0&k=20&c=NVIoirB1t57w7ekQcy7XNq-E5Hl94u3JfHNXuSbWcig=" alt="Image" class="img-fluid">
 </div>
  <!-- Footer -->
  <footer class="footer">
