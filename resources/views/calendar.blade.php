@@ -66,38 +66,45 @@
     
     <div class="container-fluid">
         <div class="row">
-            <!-- Sidebar -->
-            <nav class="col-md-2 col-sm-3 bg-light sidebar">
-                <div class="sidebar-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="{{ url('/appointments') }}">
-                                <h1 class="h2">Dashboard</h1>
-                                <i class="fas fa-calendar-alt mr-2 text-dark"></i>
-                                <span class="text-dark">Appointments</span> <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link"  href="{{ url('/users') }}">
-                                <i class="fas fa-users mr-2 text-dark"></i>
-                                <span class="text-dark">Users</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link"  href="{{ url('/calendar') }}">
-                                <i class="fas fa-calendar mr-2 text-dark"></i>
-                                <span class="text-dark">Calendar</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-question-circle mr-2 text-dark"></i>
-                                <span class="text-dark">Help</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+          <!-- Sidebar -->
+        <nav class="col-md-2 col-sm-3 bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ url('/appointments') }}">
+                            <h1 class="h2">Dashboard</h1>
+                            <i class="fas fa-calendar-alt mr-2 text-dark"></i>
+                            <span class="text-dark">Appointments</span> <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  href="{{ url('/users') }}">
+                            <i class="fas fa-users mr-2 text-dark"></i>
+                            <span class="text-dark">Users</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  href="{{ url('/calendar') }}">
+                            <i class="fas fa-calendar mr-2 text-dark"></i>
+                            <span class="text-dark">Calendar</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/help') }}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="help">
+                            <i class="fas fa-question-circle mr-2 text-dark"></i>
+                            <span class="text-dark">Help</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/settings') }}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="help">
+                            <i class="fa fa-cog mr-2 text-dark"></i>
+                            <span class="text-dark">Settings</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </nav>
 
             <!-- Calendar -->
             <div class="col-md-10 col-sm-9">

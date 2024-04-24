@@ -29,11 +29,18 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ url('/help') }}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="help">
                             <i class="fas fa-question-circle mr-2 text-dark"></i>
                             <span class="text-dark">Help</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/settings') }}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="help">
+                            <i class="fa fa-cog mr-2 text-dark"></i>
+                            <span class="text-dark">Settings</span>
+                        </a>
+                    </li>
+                    
                 </ul>
             </div>
         </nav>

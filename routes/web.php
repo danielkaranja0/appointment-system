@@ -44,6 +44,9 @@ Route::get('/calendar', function () {
 Route::get('/help', function () {
     return view('help');
 });
+Route::get('/settings', function () {
+    return view('settings');
+});
 
 Route::post('/appointments/store', [AppointmentController::class, 'store'])->name('appointments.store');
 

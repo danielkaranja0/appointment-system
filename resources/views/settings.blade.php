@@ -44,42 +44,25 @@
             </div>
         </nav>
 
-        <!-- Users Table -->
-        <div class="col-md-10 col-sm-9">
-            <div class="container">
-                <h1>Users</h1>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Role</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Loop through your users data and display them in rows -->
-                        @foreach ($users as $user)
-                        <tr>
-                            <td>{{ $user->id }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>{{ $user->role }}</td>
-                            <td>
-                                <a href="#" class="btn btn-primary btn-sm">Edit</a>
-                                <form action="#" method="POST" style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this user?')">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+        <!-- General settings Section -->
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">General Settings</h1>
             </div>
-        </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3>System Name</h3>
+                        <p>Your system name is "Appoint CMS".</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h3>System Version</h3>
+                        <p>The current version of the system is 1.0.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
 </div>
 @endsection
