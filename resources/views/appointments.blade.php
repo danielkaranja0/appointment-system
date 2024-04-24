@@ -116,7 +116,10 @@
 
                 <!-- Appointments Table -->
                 <h1>Appointments</h1>
-                <table class="table table-bordered">
+                <div class="mb-3">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Search...">
+                </div>
+                <table class="table table-bordered" id="appointmentsTable">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -249,6 +252,32 @@
 </div>
 
 <script>
+        // JavaScript for search functionality
+        document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('searchInput');
+        const appointmentsTable = document.getElementById('appointmentsTable');
+
+        searchInput.addEventListener('input', function() {
+            const searchValue = this.value.toLowerCase();
+            const rows = appointmentsTable.getElementsByTagName('tr');
+
+            for (let i = 1; i < rows.length; i++) {
+                const name = rows[i].getElementsByTagName('td')[1].textContent.toLowerCase();
+                const category = rows[i].getElementsByTagName('td')[2].textContent.toLowerCase();
+                const phoneNumber = rows[i].getElementsByTagName('td')[3].textContent.toLowerCase();
+                const appointmentDate = rows[i].getElementsByTagName('td')[4].textContent.toLowerCase();
+                const appointmentTime = rows[i].getElementsByTagName('td')[5].textContent.toLowerCase();
+                const status = rows[i].getElementsByTagName('td')[6].textContent.toLowerCase();
+                const description = rows[i].getElementsByTagName('td')[7].textContent.toLowerCase();
+
+                if (name.includes(searchValue) || category.includes(searchValue) || phoneNumber.includes(searchValue) || appointmentDate.includes(searchValue) || appointmentTime.includes(searchValue) || status.includes(searchValue) || description.includes(searchValue)) {
+                    rows[i].style.display = '';
+                } else {
+                    rows[i].style.display = 'none';
+                }
+            }
+        });
+    });
     document.addEventListener('DOMContentLoaded', function() {
         // Add event listener for the save button
         document.getElementById('saveAppointmentBtn').addEventListener('click', function(e) {
