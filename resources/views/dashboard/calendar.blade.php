@@ -31,24 +31,21 @@
             <div class="app-calendar-events-filter">
               <div class="form-check form-check-danger mb-2">
                 <input class="form-check-input input-filter" type="checkbox" id="select-personal" data-value="personal" checked>
-                <label class="form-check-label" for="select-personal">Personal</label>
+                <label class="form-check-label" for="select-personal">business appointment</label>
               </div>
               <div class="form-check mb-2">
                 <input class="form-check-input input-filter" type="checkbox" id="select-business" data-value="business" checked>
-                <label class="form-check-label" for="select-business">Business</label>
+                <label class="form-check-label" for="select-business">Business consultation</label>
               </div>
               <div class="form-check form-check-warning mb-2">
                 <input class="form-check-input input-filter" type="checkbox" id="select-family" data-value="family" checked>
-                <label class="form-check-label" for="select-family">Family</label>
+                <label class="form-check-label" for="select-family">Staff appointment</label>
               </div>
               <div class="form-check form-check-success mb-2">
                 <input class="form-check-input input-filter" type="checkbox" id="select-holiday" data-value="holiday" checked>
-                <label class="form-check-label" for="select-holiday">Holiday</label>
+                <label class="form-check-label" for="select-holiday">Conflict resolution</label>
               </div>
-              <div class="form-check form-check-info">
-                <input class="form-check-input input-filter" type="checkbox" id="select-etc" data-value="etc" checked>
-                <label class="form-check-label" for="select-etc">ETC</label>
-              </div>
+
             </div>
           </div>
         </div>
