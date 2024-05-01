@@ -3,14 +3,6 @@
 @section('content')
    <!-- Content -->
    <div class="container-xxl flex-grow-1 container-p-y">
-    <!-- Button to add appointment -->
-    <div class="text-end mb-4">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAppointmentModal">
-            Add Appointment
-        </button>
-    </div>
-    <!-- End Button to add appointment -->
-
     <div class="row g-4 mb-4">
         <div class="col-sm-6 col-xl-3">
             <div class="card">
@@ -97,6 +89,13 @@
             </div>
         </div>
         <!-- Add other card components here -->
+                <!-- Button to add appointment -->
+    <div class="text-end mb-4">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAppointmentModal">
+            Add Appointment
+        </button>
+    </div>
+    <!-- End Button to add appointment -->
     </div>
 
     <div class="card">
@@ -108,6 +107,7 @@
                 <div class="col-md-4 user_status"></div>
             </div>
         </div>
+ 
         <div class="card-datatable table-responsive">
             <table class="datatables-users table border-top">
                 <thead>
@@ -201,6 +201,8 @@
 <div class="modal fade" id="editAppointmentModal" tabindex="-1" aria-labelledby="editAppointmentModalLabel" aria-hidden="true">
     <!-- Add your modal content here -->
 </div>
+
+<!-- Refer Appointment Modal -->
 <!-- Refer Appointment Modal -->
 <div class="modal fade" id="referAppointmentModal" tabindex="-1" aria-labelledby="referAppointmentModalLabel" aria-hidden="true">
     <div class="modal-dialog">
