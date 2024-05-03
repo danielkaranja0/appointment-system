@@ -155,7 +155,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="addAppointmentForm">
+                <!-- Add appointment form -->
+                <form method="POST" action="{{ route('appointment.store') }}">
                     @csrf
                     <div class="mb-3">
                         <label for="appointmentName" class="form-label">Name</label>
@@ -186,23 +187,68 @@
                         <label for="appointmentDescription" class="form-label">Description</label>
                         <textarea class="form-control" id="appointmentDescription" name="description" placeholder="Enter description"></textarea>
                     </div>
-                    <!-- No status field for adding appointment -->
+                    <button type="submit" class="btn btn-primary">Save changes</button>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveAppointmentBtn">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Edit Appointment Modal -->
+<div class="modal fade" id="editAppointmentModal" tabindex="-1" aria-labelledby="editAppointmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editAppointmentModalLabel">Reschedule Appointment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Edit appointment form -->
+                <form method="POST" action="{{ route('appointment.update', $appointment->id) }}">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" id="editAppointmentId" name="id">
+                    <div class="mb-3">
+                        <label for="editAppointmentName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="editAppointmentName" name="name" placeholder="Enter name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editAppointmentCategory" class="form-label">Category</label>
+                        <select class="form-select" id="editAppointmentCategory" name="category" required>
+                            <option value="staff_appointment">Staff Appointment</option>
+                            <option value="business_consultation">Business Consultation</option>
+                            <option value="business_appointment">Business Appointment</option>
+                            <option value="conflict_resolution">Conflict Resolution</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editAppointmentPhone" class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="editAppointmentPhone" name="phone" placeholder="Enter phone number" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editAppointmentDate" class="form-label">Appointment Date</label>
+                        <input type="date" class="form-control" id="editAppointmentDate" name="appointment_date" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editAppointmentTime" class="form-label">Appointment Time</label>
+                        <input type="time" class="form-control" id="editAppointmentTime" name="appointment_time" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editAppointmentDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="editAppointmentDescription" name="description" placeholder="Enter description"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Edit Appointment Modal -->
-<div class="modal fade" id="editAppointmentModal" tabindex="-1" aria-labelledby="editAppointmentModalLabel" aria-hidden="true">
-    <!-- Add your modal content here -->
-</div>
-
-<!-- Refer Appointment Modal -->
 <!-- Refer Appointment Modal -->
 <div class="modal fade" id="referAppointmentModal" tabindex="-1" aria-labelledby="referAppointmentModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -237,6 +283,220 @@
 
 @section('scripts')
 <script>
-    // JavaScript scripts here
+ // JavaScript for search functionality
+//  document.addEventListener('DOMContentLoaded', function() {
+//         const searchInput = document.getElementById('searchInput');
+//         const appointmentsTable = document.getElementById('appointmentsTable');
+
+//         searchInput.addEventListener('input', function() {
+//             const searchValue = this.value.toLowerCase();
+//             const rows = appointmentsTable.getElementsByTagName('tr');
+
+//             for (let i = 1; i < rows.length; i++) {
+//                 const name = rows[i].getElementsByTagName('td')[1].textContent.toLowerCase();
+//                 const category = rows[i].getElementsByTagName('td')[2].textContent.toLowerCase();
+//                 const phoneNumber = rows[i].getElementsByTagName('td')[3].textContent.toLowerCase();
+//                 const appointmentDate = rows[i].getElementsByTagName('td')[4].textContent.toLowerCase();
+//                 const appointmentTime = rows[i].getElementsByTagName('td')[5].textContent.toLowerCase();
+//                 const status = rows[i].getElementsByTagName('td')[6].textContent.toLowerCase();
+//                 const description = rows[i].getElementsByTagName('td')[7].textContent.toLowerCase();
+
+//                 if (name.includes(searchValue) || category.includes(searchValue) || phoneNumber.includes(searchValue) || appointmentDate.includes(searchValue) || appointmentTime.includes(searchValue) || status.includes(searchValue) || description.includes(searchValue)) {
+//                     rows[i].style.display = '';
+//                 } else {
+//                     rows[i].style.display = 'none';
+//                 }
+//             }
+//         });
+//     });
+
+
+
+
+    
+//reject 
+document.querySelectorAll('.reject-appointment').forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const appointmentId = this.getAttribute('data-id');
+
+        // Send AJAX request to reject the appointment
+        fetch(`/appointment/${appointmentId}/reject`, {
+            method: 'PUT',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Handle success response
+            console.log(data.message);
+            location.reload();
+        })
+        .catch(error => {
+            // Handle error
+            console.error('Error:', error);
+        });
+    });
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Add event listener for the save button
+    document.getElementById('saveAppointmentBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        // Get form data
+        const formData = new FormData(document.getElementById('addAppointmentForm'));
+
+        // Send AJAX request to store the appointment
+        fetch('{{ route("appointment.store") }}', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Handle success response
+            console.log(data.message);
+            location.reload();
+        })
+        .catch(error => {
+            // Handle error
+            console.log('Error:', error);
+        });
+    });
+});
+
+
+
+
+        document.querySelectorAll('.approve-appointment').forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const appointmentId = this.getAttribute('data-id');
+
+        // Send AJAX request to approve the appointment
+        fetch(`/appointment/${appointmentId}/approve`, {
+            method: 'PUT',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Handle success response
+            console.log(data.message);
+            location.reload();
+            // Reload the page or update the status in the UI as needed
+        })
+        .catch(error => {
+            // Handle error
+            console.error('Error:', error);
+        });
+    });
+});
+
+
+//delete event listener
+document.querySelectorAll('.delete-appointment').forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const appointmentId = this.getAttribute('data-id');
+
+        // Send AJAX request to delete the appointment
+        fetch(`/appointments/${appointmentId}`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Handle success response
+            console.log(data.message);
+            // Reload the page
+            location.reload();
+        })
+        .catch(error => {
+            // Handle error
+            console.error('Error:', error);
+        });
+    });
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Event listener for clicking the "Reschedule" button
+    document.querySelectorAll('.reschedule-appointment').forEach(button => {
+        button.addEventListener('click', function() {
+            const appointmentId = this.getAttribute('data-id');
+            // Assuming you have an API endpoint to fetch appointment details
+            fetch(`/appointment/${appointmentId}`, {
+                method: 'GET'
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Populate the edit appointment form with appointment details
+                document.getElementById('editAppointmentId').value = data.id;
+                document.getElementById('editAppointmentName').value = data.name;
+                document.getElementById('editAppointmentCategory').value = data.category;
+                document.getElementById('editAppointmentPhone').value = data.phone;
+                document.getElementById('editAppointmentDate').value = data.appointment_date;
+                document.getElementById('editAppointmentTime').value = data.appointment_time;
+                document.getElementById('editAppointmentDescription').value = data.description;
+                // Show the edit appointment modal
+                const modal = new bootstrap.Modal(document.getElementById('editAppointmentModal'));
+                modal.show();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    });
+
+    // Event listener for submitting the edit appointment form
+    document.getElementById('editAppointmentForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        const appointmentId = formData.get('id');
+        // Assuming you have an API endpoint to update appointment details
+        fetch(`/appointment/${appointmentId}`, {
+            method: 'PUT',
+            body: formData,
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data.message); // Handle success response
+            // Optionally, close the modal or update the UI
+            const modal = new bootstrap.Modal(document.getElementById('editAppointmentModal'));
+            modal.hide();
+        })
+        .catch(error => {
+            console.error('Error:', error); // Handle error
+        });
+    });
+});
+
+
 </script>
 @endsection
