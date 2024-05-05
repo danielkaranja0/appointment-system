@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\DashboardController;
 
 
 /*
@@ -16,30 +17,53 @@ use App\Http\Controllers\AppointmentController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard.landing');
+});
+// Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+
+
+Route::get('/calendar', function () {
+    return view('dashboard.calendar');
 });
 
+Route::get('/appointment', function () {
+    return view('dashboard.appointment');
+});
+Route::get('/email', function () {
+    return view('dashboard.email');
+});
+Route::get('user-management', function () {
+    return view('dashboard.user-management');
+});
+
+
+Route::get('/support', function () {
+    return view('dashboard.support');
+});
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', function () {
+    return view('dashboard.index');
+});
 
-Route::get('/appointments', function () {
+Route::get('/appointment', function () {
     // Fetch appointments data from your database and pass it to the view
     $appointments = App\Models\Appointment::all(); // Adjust this according to your database model
     
-    return view('appointments', compact('appointments'));
+    return view('dashboard\appointment', compact('appointments'));
 });
 
-Route::get('/users', function () {
+Route::get('/user-management', function () {
     // Fetch appointments data from your database and pass it to the view
     $users = App\Models\User::all(); // Adjust this according to your database model
     
-    return view('users', compact('users'));
+    return view('dashboard\user-management', compact('users'));
 });
 
-Route::get('/calendar', function () {
-    return view('calendar');
-});
+
+// Define logout route
+// Route::get('/logout', [App\Http\Controllers\AppointmentController::class, 'login'])->name('logout');
+
 
 Route::get('/help', function () {
     return view('help');
@@ -48,23 +72,27 @@ Route::get('/settings', function () {
     return view('settings');
 });
 
-Route::post('/appointments/store', [AppointmentController::class, 'store'])->name('appointments.store');
+Route::post('appointment/store', [AppointmentController::class, 'store'])->name('appointment.store');
+
+Route::get('/appointment/{id}/edit', [AppointmentController::class, 'edit'])->name('appointment.edit');
 
 
-Route::get('/appointments/{id}/edit', [AppointmentController::class, 'edit'])->name('appointments.edit');
 
-
+Route::put('/appointment/{id}', [AppointmentController::class, 'update'])->name('appointment.update');
 
 
 
 Route::delete('/appointments/{id}', [AppointmentController::class, 'destroy']);
 
 
-Route::put('/appointments/{id}/approve', [AppointmentController::class, 'approve'])->name('appointments.approve');
-Route::put('/appointments/{id}/reject', [AppointmentController::class, 'reject'])->name('appointments.reject');
+Route::put('/appointment/{id}/approve', [AppointmentController::class, 'approve'])->name('appointment.approve');
+Route::put('/appointment/{id}/reject', [AppointmentController::class, 'reject'])->name('appointment.reject');
 
-Route::get('/appointments/{id}', [AppointmentController::class, 'show'])->name('appointments.show');
+Route::get('/appointment/{id}', [AppointmentController::class, 'show'])->name('appointment.show');
 
-Route::put('/appointments/{id}', [AppointmentController::class, 'update'])->name('appointments.update');
+Route::put('/appointment/{id}', [AppointmentController::class, 'update'])->name('appointment.update');
 
-Route::put('/appointments/{id}/reschedule', [AppointmentController::class, 'reschedule'])->name('appointments.reschedule');
+Route::put('/appointments/{id}/reschedule', [AppointmentController::class, 'reschedule'])->name('appointment.reschedule');
+
+
+
