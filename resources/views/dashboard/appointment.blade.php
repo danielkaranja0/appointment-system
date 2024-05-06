@@ -376,8 +376,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
-        document.querySelectorAll('.approve-appointment').forEach(button => {
+document.querySelectorAll('.approve-appointment').forEach(button => {
     button.addEventListener('click', function(e) {
         e.preventDefault();
         const appointmentId = this.getAttribute('data-id');
