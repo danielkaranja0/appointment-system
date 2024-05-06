@@ -124,7 +124,7 @@
 
                 <ul class="menu-inner py-1">
                     <li class="menu-item active open">
-                        <a href="{{ url('/index') }}" class="menu-link">
+                        <a href="{{ url('/dashboard') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-envelope"></i>
                             <div class="text-truncate">Dashboards</div>
                         </a>
