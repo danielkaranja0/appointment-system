@@ -1,116 +1,65 @@
 <!DOCTYPE html>
 
-<html lang="en" class="light-style  layout-navbar-fixed      " dir="ltr" data-theme="theme-default" data-assets-path="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/" data-base-url="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1" data-framework="laravel" data-template="front-menu-theme-default-light">
+<html lang="en" class="light-style  layout-navbar-fixed      " dir="ltr" data-theme="theme-default"
+    data-framework="laravel" data-template="front-menu-theme-default-light">
 
 
 <!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1/front-pages/landing by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 01 May 2024 08:13:01 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-  <title>AppointCMS</title>
-  <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 HTML Admin Dashboard Template built for developers!" />
-  <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
-  <!-- laravel CRUD token -->
-  <meta name="csrf-token" content="0ik2wYr7bdJrbIaLywFWdbHe9Pn8pTfA0aSceQ83">
-  <!-- Canonical SEO -->
-  <link rel="canonical" href="https://themeselection.com/item/sneat-bootstrap-laravel-admin-template/">
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/favicon/favicon.ico" />
+    <title>AppointCMS</title>
+    <meta name="description"
+        content="Most Powerful &amp; Comprehensive Bootstrap 5 HTML Admin Dashboard Template built for developers!" />
+    <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
+    <!-- laravel CRUD token -->
+    <meta name="csrf-token" content="0ik2wYr7bdJrbIaLywFWdbHe9Pn8pTfA0aSceQ83">
+    <!-- Canonical SEO -->
+    <link rel="canonical" href="https://themeselection.com/item/sneat-bootstrap-laravel-admin-template/">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon"
+        href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/favicon/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap"
+        rel="stylesheet">
 
-  
-      <!-- Google Tag Manager (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
-  <script>
-    (function (w, d, s, l, i) {
-      w[l] = w[l] || [];
-      w[l].push({
-        'gtm.start': new Date().getTime(),
-        event: 'gtm.js'
-      });
-      var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s),
-        dl = l != 'dataLayer' ? '&l=' + l : '';
-      j.async = true;
-      j.src =
-        '../../../../www.googletagmanager.com/gtm5445.html?id=' + i + dl;
-      f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-5DDHKGP');
-  </script>
-  <!-- End Google Tag Manager -->
-    
-
-  <!-- Include Styles -->
-  <!-- $isFront is used to append the front layout styles only on the front layout otherwise the variable will be blank -->
-  <!-- BEGIN: Theme CSS-->
-<!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com/">
-<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="/assets/vendor/fonts/boxiconsc4a7.css?id=87122b3a3900320673311cebdeb618da" />
-<!-- Core CSS -->
-<link rel="stylesheet" href="/assets/vendor/css/rtl/corea8ac.css?id=55b2a9dfaa009c41df62ca8d16e913a8" class="template-customizer-core-css" />
-<link rel="stylesheet" href="/assets/vendor/css/rtl/theme-default4c4b.css?id=9182924a7b965439eca5e189ba43eba1" class="template-customizer-theme-css" />
-<link rel="stylesheet" href="/assets/css/demob77a.css?id=69dfc5e48fce5a4ff55ff7b593cdf93d" />
-<link rel="stylesheet" href="/assets/vendor/css/pages/front-page74c7.css?id=6ea5e011264576f3de2d3b23d3ddd649" />
-<!-- Vendor Styles -->
-<link rel="stylesheet" href="/assets/vendor/libs/nouislider/nouislider.css" />
-<link rel="stylesheet" href="/assets/vendor/libs/swiper/swiper.css" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/boxiconsc4a7.css') }}" />
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="{{asset('assets/vendor/css/rtl/corea8ac.css')}}" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="{{asset('assets/vendor/css/rtl/theme-default4c4b.css')}}" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="{{asset('assets/css/demob77a.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/vendor/css/pages/front-page74c7.css')}}" />
+    <!-- Vendor Styles -->
+    <link rel="stylesheet" href="{{asset('assets/vendor/libs/nouislider/nouislider.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/vendor/libs/swiper/swiper.css')}}" />
 
 
-<!-- Page Styles -->
-<link rel="stylesheet" href="/assets/vendor/css/pages/front-page-landing.css" />
+    <!-- Page Styles -->
+    <link rel="stylesheet" href="{{asset('assets/vendor/css/pages/front-page-landing.css')}}" />
 
-  <!-- Include Scripts for customizer, helper, analytics, config -->
-  <!-- $isFront is used to append the front layout scriptsIncludes only on the front layout otherwise the variable will be blank -->
-  <!-- laravel style -->
-<script src="/assets/vendor/js/helpers.js"></script>
-<!-- beautify ignore:start -->
+    <!-- Include Scripts for customizer, helper, analytics, config -->
+    <!-- $isFront is used to append the front layout scriptsIncludes only on the front layout otherwise the variable will be blank -->
+    <!-- laravel style -->
+    <script src="{{asset('assets/vendor/js/helpers.js')}}"></script>
+    <!-- beautify ignore:start -->
   <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
   <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
-  <script src="/assets/vendor/js/template-customizer.js"></script>
+  <script src="{{asset('assets/vendor/js/template-customizer.js')}}"></script>
 
   <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-  <script src="/assets/js/front-config.js"></script>
+  <script src="{{asset('assets/js/front-config.js')}}"></script>
 
-  <script>
-    window.templateCustomizer = new TemplateCustomizer({
-      cssPath: '',
-      themesPath: '',
-      defaultStyle: "light",
-      displayCustomizer: "true",
-      lang: 'en',
-      pathResolver: function(path) {
-        var resolvedPaths = {
-          // Core stylesheets
-                      'core.css': 'https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/vendor/css/rtl/core.css?id=55b2a9dfaa009c41df62ca8d16e913a8',
-            'core-dark.css': 'https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/vendor/css/rtl/core-dark.css?id=d98ae2a03b5b1b05651411ee58ef81a6',
-          
-          // Themes
-                      'theme-default.css': 'https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-default.css?id=9182924a7b965439eca5e189ba43eba1',
-            'theme-default-dark.css':
-            'https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-default-dark.css?id=ae30991ef3f62e7c03ca6f8930843e80',
-                      'theme-bordered.css': 'https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-bordered.css?id=a4f95a927b1e2bcdfd57a3bbfb2bd3d9',
-            'theme-bordered-dark.css':
-            'https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-bordered-dark.css?id=2a668deb480284f975db82d0a7277156',
-                      'theme-semi-dark.css': 'https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-semi-dark.css?id=9c02fb39c47f91b2d198f343fa8b4df7',
-            'theme-semi-dark-dark.css':
-            'https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-semi-dark-dark.css?id=c4b1950a14ffd431f752917b97a0ee51',
-                  }
-        return resolvedPaths[path] || path;
-      },
-      'controls': ["rtl","style"],
-
-    });
-  </script>
 </head>
 
 <body>
-  
-      <!-- Google Tag Manager (noscript) (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5DDHKGP" height="0" width="0" style="display: none; visibility: hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
+
     
 
   <!-- Layout Content -->
@@ -988,8 +937,7 @@
       <div class="mb-2 mb-md-0">
         <span class="footer-text">©
           <script>
-          document.write(new Date().getFullYear());
-
+              document.write(new Date().getFullYear());
           </script>
         </span>
         <a href="" target="_blank" class="fw-medium text-white footer-link">Skyliq Solutions,</a>
@@ -1014,21 +962,21 @@
 </footer>
 <!-- Footer: End -->
 
-<script src="/assets/vendor/js/dropdown-hover.js"></script>
-<script src="/assets/vendor/js/mega-dropdown.js"></script>
-<script src="/assets/vendor/libs/popper/popper0a73.js?id=baf82d96b7771efbcc05c3b77135d24c"></script>
-<script src="/assets/vendor/js/bootstrapcfc4.js?id=4648227467e3fd3f4cf976cfb0e43aea"></script>
+<script src="{{asset('assets/vendor/js/dropdown-hover.js')}}"></script>
+<script src="{{asset('assets/vendor/js/mega-dropdown.js')}}"></script>
+<script src="{{asset('assets/vendor/libs/popper/popper0a73.js')}}"></script>
+<script src="{{asset('assets/vendor/js/bootstrapcfc4.js')}}"></script>
 
-<script src="/assets/vendor/libs/nouislider/nouislider.js"></script>
-<script src="/assets/vendor/libs/swiper/swiper.js"></script>
+<script src="{{asset('assets/vendor/libs/nouislider/nouislider.js')}}"></script>
+<script src="{{asset('assets/vendor/libs/swiper/swiper.js')}}"></script>
 <!-- END: Page Vendor JS-->
 <!-- BEGIN: Theme JS-->
-<script src="/assets/js/front-maind55a.js?id=7e3beea798d1161b84cbf0934a1cd521"></script>
+<script src="{{asset('assets/js/front-maind55a.js')}}s"></script>
 <!-- END: Theme JS-->
 <!-- Pricing Modal JS-->
 <!-- END: Pricing Modal JS-->
 <!-- BEGIN: Page JS-->
-<script src="/assets/js/front-page-landing.js"></script>
+<script src="{{asset('assets/js/front-page-landing.js')}}"></script>
 <!-- END: Page JS-->
 
 </body>
