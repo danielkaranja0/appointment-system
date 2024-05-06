@@ -61,6 +61,13 @@ Route::get('/user-management', function () {
 });
 
 
+Route::delete('/user-management/{user}', 'UserController@destroy')->name('user-management.destroy');
+
+// web.php
+
+
+
+
 // Define logout route
 // Route::get('/logout', [App\Http\Controllers\AppointmentController::class, 'login'])->name('logout');
 
