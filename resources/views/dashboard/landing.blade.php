@@ -20,7 +20,7 @@
     <!-- laravel CRUD token -->
     <meta name="csrf-token" content="0ik2wYr7bdJrbIaLywFWdbHe9Pn8pTfA0aSceQ83">
     <!-- Canonical SEO -->
-    <link rel="canonical" href="https://themeselection.com/item/sneat-bootstrap-laravel-admin-template/">
+    <link rel="canonical" href="#">
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon"
         href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/favicon/favicon.ico" />
@@ -954,7 +954,7 @@
           <img src="/assets/img/front-pages/icons/twitter-light.png" alt="twitter icon" data-app-light-img="front-pages/icons/twitter-light.png" data-app-dark-img="front-pages/icons/twitter-dark.png" />
         </a>
         <a href="" class="footer-link" target="_blank">
-          <img src="/assets/img/front-pages/icons/instagram-light.png" alt="google icon" data-app-light-img="front-pages/icons/instagram-light.png" data-app-dark-img="front-pages/icons/instagram-dark.png" />
+          <img src="{{asset('/assets/img/front-pages/icons/instagram-light.png')}}" alt="google icon" data-app-light-img="front-pages/icons/instagram-light.png" data-app-dark-img="front-pages/icons/instagram-dark.png" />
         </a>
       </div>
     </div>
