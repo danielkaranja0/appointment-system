@@ -71,7 +71,7 @@ class AppointmentController extends Controller
             'appointment_date' => 'required|date',
             'appointment_time' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'status' => 'required|string|max:255',
+            // 'status' => 'required|string|max:255',
         ]);
 
         // Find the appointment by ID
@@ -86,27 +86,27 @@ class AppointmentController extends Controller
 
     
 
-    // public function reschedule(Request $request, $id)
-    // {
-    //     // Validate the request data for rescheduling
-    //     $validatedData = $request->validate([
-    //         'name' => 'required|string|max:255',
-    //         'category' => 'required|string|max:255',
-    //         'phone' => 'required|string|max:255',
-    //         'appointment_date' => 'required|date',
-    //         'appointment_time' => 'required|string|max:255',
-    //         'description' => 'nullable|string',
-    //     ]);
+    public function reschedule(Request $request, $id)
+    {
+        // Validate the request data for rescheduling
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
+            'phone' => 'required|string|max:255',
+            'appointment_date' => 'required|date',
+            'appointment_time' => 'required|string|max:255',
+            'description' => 'nullable|string',
+        ]);
 
-    //     // Find the appointment by ID
-    //     $appointment = Appointment::findOrFail($id);
+        // Find the appointment by ID
+        $appointment = Appointment::findOrFail($id);
 
-    //     // Update the appointment with the validated data
-    //     $appointment->update($validatedData);
+        // Update the appointment with the validated data
+        $appointment->update($validatedData);
 
-    //     // Return a success response
-    //     return response()->json(['message' => 'Appointment rescheduled successfully']);
-    // }
+        // Return a success response
+        return response()->json(['message' => 'Appointment rescheduled successfully']);
+    }
 
 
 
