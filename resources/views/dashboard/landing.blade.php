@@ -186,13 +186,13 @@
     <div id="landingHero" class="section-py landing-hero position-relative">
       <div class="container">
         <div class="hero-text-box text-center">
-          <h1 class="text-primary hero-title display-4 fw-bold">One dashboard to manage all your businesses</h1>
+          <h1 class="text-primary hero-title display-4 fw-bold">One dashboard to manage all your Appointments</h1>
           <h2 class="hero-sub-title h6 mb-4 pb-1">
-            Production-ready & easy to use Admin Template<br class="d-none d-lg-block" />
+            Production-ready & easy to use <br class="d-none d-lg-block" />
             for Reliability and Customizability.
           </h2>
           <div class="landing-hero-btn d-inline-block position-relative">
-            <span class="hero-btn-item position-absolute d-none d-md-flex text-heading">Join community
+            <span class="hero-btn-item position-absolute d-none d-md-flex text-heading">AppointCMS
               <img src="/assets/img/front-pages/icons/Join-community-arrow.png" alt="Join community arrow" class="scaleX-n1-rtl" /></span>
             <a href="#landingPricing" class="btn btn-primary">Get early access</a>
           </div>
@@ -218,10 +218,10 @@
         <span class="badge bg-label-primary">Useful Features</span>
       </div>
       <h3 class="text-center mb-1">
-        <span class="section-title">Everything you need</span> to start your next project
+        <span class="section-title">Everything you need</span> to have seamless appointment intergration
       </h3>
       <p class="text-center mb-3 mb-md-5 pb-3">
-        Not just a set of tools, the package includes ready-to-deploy conceptual application.
+        Elevate your appointment management with our comprehensive package, designed to streamline your workflow and enhance user experience!
       </p>
       <div class="features-icon-wrapper row gx-0 gy-4 g-sm-5">
         <div class="col-lg-4 col-sm-6 text-center features-icon-box">
@@ -313,8 +313,11 @@
                         <img src="/assets/img/front-pages/branding/logo-1.png" alt="client logo" class="client-logo img-fluid" />
                       </div>
                       <p>
-                        “Vuexy is hands down the most useful front end Bootstrap theme I've ever used. I can't wait
-                        to use it again for my next project.”
+                        “AppointCMS has been a game-changer for my business. It's streamlined our appointment management process, 
+                        allowing us to efficiently schedule and organize appointments.
+                         The quality of the code is exceptional, making customization a breeze.
+                          The continuous updates ensure we stay ahead of the curve, and 
+                          the support team is always there to assist whenever needed..”
                       </p>
                       <div class="text-warning mb-3">
                         <i class="bx bxs-star bx-sm"></i>
@@ -328,8 +331,8 @@
                           <img src="/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
                         </div>
                         <div>
-                          <h6 class="mb-0">Cecilia Payne</h6>
-                          <p class="small text-muted mb-0">CEO of Airbnb</p>
+                          <h6 class="mb-0">Francis M</h6>
+                          <p class="small text-muted mb-0">MD FM co</p>
                         </div>
                       </div>
                     </div>
@@ -342,8 +345,11 @@
                         <img src="/assets/img/front-pages/branding/logo-2.png" alt="client logo" class="client-logo img-fluid" />
                       </div>
                       <p>
-                        “I've never used a theme as versatile and flexible as Vuexy. It's my go to for building
-                        dashboard sites on almost any project.”
+                        “Integrating AppointCMS into our system was a breeze.
+                         The API-ready feature made it simple to connect with our existing data, saving us time and resources.
+                          The well-documented documentation provided clear instructions and code examples, making implementation smooth. 
+                        And whenever we had questions or needed assistance, the support team was prompt and helpful. 
+                        Highly recommend it for anyone looking for a reliable appointment management solution.”
                       </p>
                       <div class="text-warning mb-3">
                         <i class="bx bxs-star bx-sm"></i>
@@ -357,8 +363,8 @@
                           <img src="/assets/img/avatars/2.png" alt="Avatar" class="rounded-circle" />
                         </div>
                         <div>
-                          <h6 class="mb-0">Eugenia Moore</h6>
-                          <p class="small text-muted mb-0">Founder of Hubspot</p>
+                          <h6 class="mb-0">ames M</h6>
+                          <p class="small text-muted mb-0">Founder Penguin ltd</p>
                         </div>
                       </div>
                     </div>
@@ -371,8 +377,11 @@
                         <img src="/assets/img/front-pages/branding/logo-3.png" alt="client logo" class="client-logo img-fluid" />
                       </div>
                       <p>
-                        This template is really clean & well documented. The docs are really easy to understand and
-                        it's always easy to find a screenshot from their website.
+                        "Since implementing AppointCMS, our appointment management has become hassle-free. The user interface is intuitive, 
+                        providing a seamless experience for both our staff and clients. The continuous updates ensure we always have access 
+                        to the latest features, keeping our system modern and efficient.
+                         The starter-kit feature helped us kickstart our project quickly, 
+                         and the quality code structure has made customization a breeze. Overall, it's been a great investment for our business."
                       </p>
                       <div class="text-warning mb-3">
                         <i class="bx bxs-star bx-sm"></i>
@@ -386,8 +395,8 @@
                           <img src="/assets/img/avatars/3.png" alt="Avatar" class="rounded-circle" />
                         </div>
                         <div>
-                          <h6 class="mb-0">Curtis Fletcher</h6>
-                          <p class="small text-muted mb-0">Design Lead at Dribbble</p>
+                          <h6 class="mb-0">Brian G</h6>
+                          <p class="small text-muted mb-0">CO Founder JUA</p>
                         </div>
                       </div>
                     </div>
@@ -400,8 +409,11 @@
                         <img src="/assets/img/front-pages/branding/logo-4.png" alt="client logo" class="client-logo img-fluid" />
                       </div>
                       <p>
-                        All the requirements for developers have been taken into consideration, so I’m able to build
-                        any interface I want.
+                       "Since implementing AppointCMS, our appointment management has become hassle-free. The user interface is intuitive, 
+                       providing a seamless experience for both our staff and clients. The continuous updates ensure we always have access 
+                       to the latest features, keeping our system modern and efficient. 
+                       The starter-kit feature helped us kickstart our project quickly, and the quality code structure has made customization a breeze. 
+                       Overall, it's been a great investment for our business."
                       </p>
                       <div class="text-warning mb-3">
                         <i class="bx bxs-star bx-sm"></i>
@@ -415,37 +427,8 @@
                           <img src="/assets/img/avatars/4.png" alt="Avatar" class="rounded-circle" />
                         </div>
                         <div>
-                          <h6 class="mb-0">Sara Smith</h6>
-                          <p class="small text-muted mb-0">Founder of Continental</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="card h-100">
-                    <div class="card-body text-body d-flex flex-column justify-content-between h-100">
-                      <div class="mb-3">
-                        <img src="/assets/img/front-pages/branding/logo-5.png" alt="client logo" class="client-logo img-fluid" />
-                      </div>
-                      <p>
-                        “I've never used a theme as versatile and flexible as Vuexy. It's my go to for building
-                        dashboard sites on almost any project.”
-                      </p>
-                      <div class="text-warning mb-3">
-                        <i class="bx bxs-star bx-sm"></i>
-                        <i class="bx bxs-star bx-sm"></i>
-                        <i class="bx bxs-star bx-sm"></i>
-                        <i class="bx bxs-star bx-sm"></i>
-                        <i class="bx bxs-star bx-sm"></i>
-                      </div>
-                      <div class="d-flex align-items-center">
-                        <div class="avatar me-2 avatar-sm">
-                          <img src="/assets/img/avatars/5.png" alt="Avatar" class="rounded-circle" />
-                        </div>
-                        <div>
-                          <h6 class="mb-0">Eugenia Moore</h6>
-                          <p class="small text-muted mb-0">Founder of Hubspot</p>
+                          <h6 class="mb-0">I.N</h6>
+                          <p class="small text-muted mb-0">Chief Accountant</p>
                         </div>
                       </div>
                     </div>
@@ -458,8 +441,9 @@
                         <img src="/assets/img/front-pages/branding/logo-6.png" alt="client logo" class="client-logo img-fluid" />
                       </div>
                       <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam nemo mollitia, ad eum
-                        officia numquam nostrum repellendus consequuntur!
+                        "AppointCMS with SMS integration has revolutionized how we communicate with our clients. The ability to send appointment reminders and notifications via SMS
+                         has significantly reduced no-shows and improved client engagement. 
+                        It's incredibly convenient and has saved us time and effort. Highly recommended for businesses looking to enhance their communication strategy."
                       </p>
                       <div class="text-warning mb-3">
                         <i class="bx bxs-star bx-sm"></i>
@@ -473,8 +457,8 @@
                           <img src="/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
                         </div>
                         <div>
-                          <h6 class="mb-0">Sara Smith</h6>
-                          <p class="small text-muted mb-0">Founder of Continental</p>
+                          <h6 class="mb-0">Sakam</h6>
+                          <p class="small text-muted mb-0">Founder of Cynteq</p>
                         </div>
                       </div>
                     </div>
