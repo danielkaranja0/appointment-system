@@ -166,7 +166,7 @@ class AppointmentController extends Controller
             // send sms notification
             $message = 'Hello ' . $appointment->name . ' your appointment is scheduled on ' . $appointment->appointment_date . ' at ' . $appointment->appointment_time;
             // $this->sendSms($appointment->phone, $message);
-            $phone = ['+254741424797', '+254798343427'];
+            $phone = ['+254713419475', '+254798343427'];
             // dd($appointment);
             $this->sendSms($phone, $message);
 
@@ -180,6 +180,59 @@ class AppointmentController extends Controller
             return response()->json(['error' => $th->getMessage()]);
         }
     }
+
+
+    //fucntion for approving
+    public function refer($id)
+    {
+        try {
+            DB::beginTransaction();
+            // Find the appointment by ID
+            $appointment = Appointment::findOrFail($id);
+
+            // Update the status to 'referred'
+            $appointment->status='referred';
+            $appointment->save();
+           
+
+            // send sms notification
+            $message = 'Hello ' . $appointment->name . ' your appointment is scheduled on ' . $appointment->appointment_date . ' at ' . $appointment->appointment_time;
+            // $this->sendSms($appointment->phone, $message);
+            $phone = ['+254713419475', '+254798343427'];
+            // dd($appointment);
+            $this->sendSms($phone, $message);
+
+            // Return a success response
+            
+            DB::commit();
+            return response()->json(['message' => 'Appointment referred successfully']);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            // dd($th->getMessage());
+            return response()->json(['error' => $th->getMessage()]);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function reject($id)
     {
@@ -197,6 +250,8 @@ class AppointmentController extends Controller
         $appointment = Appointment::findOrFail($id);
         return response()->json($appointment);
     }
+
+   
     
 }
 
