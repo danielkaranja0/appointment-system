@@ -134,9 +134,9 @@ class AppointmentController extends Controller
                 return response()->json(['error' => 'status does not exist']);
             }
 
-            // $this->sendSms($appointment->phone, $message);
+            $this->sendSms($appointment->phone, $message);
             // $phone = ['+254798343427'];
-            // $this->sendSms($phone, $message);
+            $this->sendSms($phone, $message);
 
             // Return a success response
             DB::commit();
@@ -165,10 +165,10 @@ class AppointmentController extends Controller
 
             // send sms notification
             $message = 'Hello ' . $appointment->name . ' your appointment is scheduled on ' . $appointment->appointment_date . ' at ' . $appointment->appointment_time;
-            // $this->sendSms($appointment->phone, $message);
-            $phone = ['+254713419475', '+254798343427'];
+            $this->sendSms($appointment->phone, $message);
+            // $phone = ['+254713419475', '+254798343427'];
             // dd($appointment);
-            $this->sendSms($phone, $message);
+            // $this->sendSms($phone, $message);
 
             // Return a success response
             
@@ -196,11 +196,11 @@ class AppointmentController extends Controller
            
 
             // send sms notification
-            $message = 'Hello ' . $appointment->name . ' your appointment is scheduled on ' . $appointment->appointment_date . ' at ' . $appointment->appointment_time;
-            // $this->sendSms($appointment->phone, $message);
-            $phone = ['+254713419475', '+254798343427'];
+            $message = 'Hello  you have an appointment refeered to you scheduled on ' . $appointment->appointment_date . ' at ' . $appointment->appointment_time;
+            $this->sendSms($appointment->phone, $message);
+            // $phone = ['+254798343427'];
             // dd($appointment);
-            $this->sendSms($phone, $message);
+            // $this->sendSms($phone, $message);
 
             // Return a success response
             
