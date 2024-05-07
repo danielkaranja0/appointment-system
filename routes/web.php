@@ -91,7 +91,7 @@ Route::put('/appointment/{id}', [AppointmentController::class, 'update'])->name(
 
 Route::delete('/appointments/{id}', [AppointmentController::class, 'destroy']);
 
-
+Route::put('/appointment/{id}/refer', [AppointmentController::class, 'refer'])->name('appointment.refer');
 Route::put('/appointment/{id}/approve', [AppointmentController::class, 'approve'])->name('appointment.approve');
 Route::put('/appointment/{id}/reject', [AppointmentController::class, 'reject'])->name('appointment.reject');
 
