@@ -134,8 +134,8 @@
                             <button class="btn btn-sm btn-danger delete-appointment" data-id="{{ $appointment->id }}">Delete</button>
                             <button class="btn btn-sm btn-success approve-appointment" data-id="{{ $appointment->id }}">Approve</button>
                             <button class="btn btn-sm btn-warning reject-appointment" data-id="{{ $appointment->id }}">Reject</button>
+                            <button class="btn btn-sm btn-warning refer-appointment" data-id="{{ $appointment->id }}">Refer</button>
                             <button class="btn btn-sm btn-info reschedule-appointment" data-id="{{ $appointment->id }}" data-bs-toggle="modal" data-bs-target="#editAppointmentModal">Reschedule</button>
-                            <button class="btn btn-sm btn-info refer-appointment" data-id="{{ $appointment->id }}" data-bs-toggle="modal" data-bs-target="#referAppointmentModal">Refer</button>
                         </td>
                     </tr>
                     @endforeach
@@ -249,7 +249,7 @@
     </div>
 </div>
 
-<!-- Refer Appointment Modal -->
+{{-- <!-- Refer Appointment Modal -->
 <div class="modal fade" id="referAppointmentModal" tabindex="-1" aria-labelledby="referAppointmentModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -276,7 +276,7 @@
         </div>
     </div>
 </div>
-
+ --}}
 
 
 @endsection
@@ -402,6 +402,32 @@ document.querySelectorAll('.approve-appointment').forEach(button => {
     });
 });
 
+// refer event listener
+document.querySelectorAll('.refer-appointment').forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const appointmentId = this.getAttribute('data-id');
+
+        // Send AJAX request to refer the appointment
+        fetch(`/appointment/${appointmentId}/refer`, {
+            method: 'PUT',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Handle success response
+            console.log(data.message);
+            location.reload();
+            // Reload the page or update the status in the UI as needed
+        })
+        .catch(error => {
+            // Handle error
+            console.error('Error:', error);
+        });
+    });
+});
 
 //delete event listener
 document.querySelectorAll('.delete-appointment').forEach(button => {
