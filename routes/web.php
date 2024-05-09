@@ -102,4 +102,4 @@ Route::put('/appointment/{id}', [AppointmentController::class, 'update'])->name(
 Route::put('/appointments/{id}/reschedule', [AppointmentController::class, 'reschedule'])->name('appointment.reschedule');
 
 
-
+Route::get('/appointments', [AppointmentController::class, 'index'])->name('appointments.index');
