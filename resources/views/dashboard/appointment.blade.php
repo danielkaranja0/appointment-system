@@ -131,7 +131,8 @@
                         <td>{{ $appointment->status }}</td>
                         <td>
                             <!-- Buttons for actions -->
-                            <button class="btn btn-sm btn-danger delete-appointment" data-id="{{ $appointment->id }}">Delete</button>
+                            <!-- Your delete button -->
+                            <button class="btn btn-sm btn-danger delete-appointment" data-id="{{ $appointment->id }}" data-toggle="modal" data-target="#confirmDeleteModal">Delete</button>
                             <button class="btn btn-sm btn-success approve-appointment" data-id="{{ $appointment->id }}">Approve</button>
                             <button class="btn btn-sm btn-warning reject-appointment" data-id="{{ $appointment->id }}">Reject</button>
                             <button class="btn btn-sm btn-warning refer-appointment" data-id="{{ $appointment->id }}">Refer</button>
@@ -196,6 +197,29 @@
         </div>
     </div>
 </div>
+
+
+{{-- confirm deletion --}}
+<!-- Modal HTML -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Deletion</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to delete this appointment?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" id="confirmDeleteButton">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
 <!-- Edit Appointment Modal -->
 <div class="modal fade" id="editAppointmentModal" tabindex="-1" aria-labelledby="editAppointmentModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -429,32 +453,38 @@ document.querySelectorAll('.refer-appointment').forEach(button => {
     });
 });
 
-//delete event listener
 document.querySelectorAll('.delete-appointment').forEach(button => {
     button.addEventListener('click', function(e) {
         e.preventDefault();
         const appointmentId = this.getAttribute('data-id');
-
-        // Send AJAX request to delete the appointment
-        fetch(`/appointments/${appointmentId}`, {
-            method: 'DELETE',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Handle success response
-            console.log(data.message);
-            // Reload the page
-            location.reload();
-        })
-        .catch(error => {
-            // Handle error
-            console.error('Error:', error);
-        });
+        
+        // Show confirmation dialog
+        if (confirm("Are you sure you want to delete this appointment?")) {
+            // User confirmed, proceed with deletion
+            fetch(`/appointments/${appointmentId}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle success response
+                console.log(data.message);
+                // Reload the page
+                location.reload();
+            })
+            .catch(error => {
+                // Handle error
+                console.error('Error:', error);
+            });
+        } else {
+            // User cancelled, do nothing
+            console.log("Deletion cancelled");
+        }
     });
 });
+
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -508,18 +538,20 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            return response.json();
-        })
-        .then(data => {
-            console.log(data.message); // Handle success response
-            // Optionally, close the modal or update the UI
-            const modal = new bootstrap.Modal(document.getElementById('editAppointmentModal'));
-            modal.hide();
+            // Reload the appointments table view after a short delay to ensure changes are reflected
+            setTimeout(() => {
+                location.reload();
+            }, 500);
         })
         .catch(error => {
             console.error('Error:', error); // Handle error
         });
     });
 });
+
+
+
+
 </script>
+
 @endsection
