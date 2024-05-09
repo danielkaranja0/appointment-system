@@ -24,21 +24,22 @@ class AppointmentController extends Controller
             'description' => 'nullable',
             // Remove 'status' validation as it will be set automatically
         ]);
-
+    
         // Determine the default status based on the user's role
-        $defaultStatus = Auth::user()->role === 'secretary' || Auth::user()->role === 'manager'
-            ? 'pending approval'
-            : 'approved';
-
+        $defaultStatus = 'pending approval';
         // Add the default status to the validated data
         $validatedData['status'] = $defaultStatus;
-
+    
         // Create the appointment with the validated data
         Appointment::create($validatedData);
-
-        // Return a success response
-        return response()->json(['message' => 'Appointment created successfully'], 200);
+    
+        // Flash success message to the session
+        session()->flash('success', 'Appointment created successfully');
+    
+        // Redirect back to the same page
+        return redirect()->back();
     }
+    
 
     public function destroy($id)
     {
@@ -61,28 +62,30 @@ class AppointmentController extends Controller
         // Pass the appointment data to the view for editing
         return view('edit-appointment', compact('appointment'));
     }
-    public function update(Request $request, $id)
-    {
-        // Validate the request data
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'category' => 'required|string|max:255',
-            'phone' => 'required|string|max:255',
-            'appointment_date' => 'required|date',
-            'appointment_time' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            // 'status' => 'required|string|max:255',
-        ]);
 
-        // Find the appointment by ID
-        $appointment = Appointment::findOrFail($id);
+public function update(Request $request, $id)
+{
+    // Validate the request data
+    $validatedData = $request->validate([
+        'name' => 'required|string|max:255',
+        'category' => 'required|string|max:255',
+        'phone' => 'required|string|max:255',
+        'appointment_date' => 'required|date',
+        'appointment_time' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        // 'status' => 'required|string|max:255',
+    ]);
 
-        // Update the appointment with the validated data
-        $appointment->update($validatedData);
+    // Find the appointment by ID
+    $appointment = Appointment::findOrFail($id);
 
-        // Return a success response
-        return response()->json(['message' => 'Appointment updated successfully']);
-    }
+    // Update the appointment with the validated data
+    $appointment->update($validatedData);
+
+    // Redirect back to the edit page with a success message
+    return redirect()->back()->with('success', 'Appointment updated successfully');
+}
+
 
     
 
@@ -107,6 +110,8 @@ class AppointmentController extends Controller
         // Return a success response
         return response()->json(['message' => 'Appointment rescheduled successfully']);
     }
+
+    
 
 
 
@@ -136,7 +141,7 @@ class AppointmentController extends Controller
 
             $this->sendSms($appointment->phone, $message);
             // $phone = ['+254798343427'];
-            $this->sendSms($phone, $message);
+            // $this->sendSms($phone, $message);
 
             // Return a success response
             DB::commit();
@@ -157,30 +162,27 @@ class AppointmentController extends Controller
             DB::beginTransaction();
             // Find the appointment by ID
             $appointment = Appointment::findOrFail($id);
-
+    
             // Update the status to 'approved'
-            $appointment->status='approved';
+            $appointment->status = 'approved';
             $appointment->save();
-           
+    
+            // Construct the message for the SMS notification
+            $message = 'Hello ' . $appointment->name . ', your appointment is scheduled on ' . $appointment->appointment_date . ' at ' . $appointment->appointment_time . PHP_EOL . 'scheduled by Dama Mobile Spares' . PHP_EOL . 'powered by Skyliq Solutions';
 
-            // send sms notification
-            $message = 'Hello ' . $appointment->name . ' your appointment is scheduled on ' . $appointment->appointment_date . ' at ' . $appointment->appointment_time;
+    
+            // Send SMS notification
             $this->sendSms($appointment->phone, $message);
-            // $phone = ['+254713419475', '+254798343427'];
-            // dd($appointment);
-            // $this->sendSms($phone, $message);
-
+    
             // Return a success response
-            
             DB::commit();
             return response()->json(['message' => 'Appointment approved successfully']);
         } catch (\Throwable $th) {
             DB::rollback();
-            // dd($th->getMessage());
             return response()->json(['error' => $th->getMessage()]);
         }
     }
-
+    
 
     //fucntion for approving
     public function refer($id)
@@ -219,6 +221,14 @@ class AppointmentController extends Controller
 
 
 
+    public function index()
+    {
+        // Fetch appointments data from your database
+        $appointments = Appointment::all(); // Adjust this according to your database model
+        
+        // Return the appointments data as JSON
+        return response()->json($appointments);
+    }
 
 
 
