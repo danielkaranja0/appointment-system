@@ -24,16 +24,16 @@ class RedirectIfAuthenticated
             if (Auth::guard($guard)->check()) {
                 // Check the user's role and redirect accordingly
                 $user = Auth::user();
-                if ($user->role === 'ceo') {
-                    return redirect()->route('ceo.dashboard');
-                } elseif ($user->role === 'manager') {
-                    return redirect()->route('manager.dashboard');
-                } elseif ($user->role === 'secretary') {
-                    return redirect()->route('secretary.dashboard');
-                } else {
-                    // Handle default redirection if the user's role is not recognized
-                    return redirect(RouteServiceProvider::HOME);
-                }
+                // if ($user->role === 'ceo') {
+                //     return redirect()->route('ceo.dashboard');
+                // } elseif ($user->role === 'manager') {
+                //     return redirect()->route('manager.dashboard');
+                // } elseif ($user->role === 'secretary') {
+                //     return redirect()->route('secretary.dashboard');
+                // } else {
+                //     // Handle default redirection if the user's role is not recognized
+                //     return redirect(RouteServiceProvider::HOME);
+                // }
             }
         }
 
