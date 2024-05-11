@@ -184,37 +184,32 @@ public function update(Request $request, $id)
     }
     
 
-    //fucntion for approving
-    public function refer($id)
-    {
-        try {
-            DB::beginTransaction();
-            // Find the appointment by ID
-            $appointment = Appointment::findOrFail($id);
+    public function refer(Request $request, $id)
+{
+    try {
+        DB::beginTransaction();
+        // Find the appointment by ID
+        $appointment = Appointment::findOrFail($id);
 
-            // Update the status to 'referred'
-            $appointment->status='referred';
-            $appointment->save();
-           
+        // Update the status to 'referred'
+        $appointment->status = 'referred';
+        $appointment->save();
 
-            // send sms notification
-            $message = 'Hello  you have an appointment refeered to you scheduled on ' . $appointment->appointment_date . ' at ' . $appointment->appointment_time;
-            $this->sendSms($appointment->phone, $message);
-            // $phone = ['+254798343427'];
-            // dd($appointment);
-            // $this->sendSms($phone, $message);
+        // Extract the phone number from the request
+        $phoneNumber = $request->input('phone');
 
-            // Return a success response
-            
-            DB::commit();
-            return response()->json(['message' => 'Appointment referred successfully']);
-        } catch (\Throwable $th) {
-            DB::rollback();
-            // dd($th->getMessage());
-            return response()->json(['error' => $th->getMessage()]);
-        }
+        // Send sms notification
+        $message = 'Hello, you have an appointment referred to you scheduled on ' . $appointment->appointment_date . ' at ' . $appointment->appointment_time;
+        $this->sendSms($phoneNumber, $message);
+
+        // Return a success response
+        DB::commit();
+        return response()->json(['message' => 'Appointment referred successfully']);
+    } catch (\Throwable $th) {
+        DB::rollback();
+        return response()->json(['error' => $th->getMessage()]);
     }
-
+}
 
 
 
