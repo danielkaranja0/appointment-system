@@ -4,8 +4,6 @@
     data-framework="laravel" data-template="front-menu-theme-default-light">
 
 
-<!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1/front-pages/landing by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 01 May 2024 08:13:01 GMT -->
-<!-- Added by HTTrack -->
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
@@ -15,8 +13,8 @@
 
     <title>AppointCMS</title>
     <meta name="description"
-        content="Most Powerful &amp; Comprehensive Bootstrap 5 HTML Admin Dashboard Template built for developers!" />
-    <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
+        content="AppointCMS" />
+    <meta name="keywords" content="Appointment Booking ">
     <!-- laravel CRUD token -->
     <meta name="csrf-token" content="0ik2wYr7bdJrbIaLywFWdbHe9Pn8pTfA0aSceQ83">
     <!-- Canonical SEO -->
@@ -198,7 +196,7 @@
           </div>
         </div>
         <div id="heroDashboardAnimation" class="hero-animation-img">
-          <a href="../app/ecommerce/dashboard.html" target="_blank">
+          <a href="" target="_blank">
             <div id="heroAnimationImg" class="position-relative hero-dashboard-img">
               <img src="/assets/img/front-pages/landing-page/hero-dashboard-light.png" alt="hero dashboard" class="animation-img" data-app-light-img="front-pages/landing-page/hero-dashboard-light.png" data-app-dark-img="front-pages/landing-page/hero-dashboard-dark.html" />
               <img src="/assets/img/front-pages/landing-page/hero-elements-light.png" alt="hero elements" class="position-absolute hero-elements-img animation-img top-0 start-0" data-app-light-img="front-pages/landing-page/hero-elements-light.png" data-app-dark-img="front-pages/landing-page/hero-elements-dark.html" />
@@ -310,7 +308,6 @@
                   <div class="card h-100">
                     <div class="card-body text-body d-flex flex-column justify-content-between h-100">
                       <div class="mb-3">
-                        <img src="/assets/img/front-pages/branding/logo-1.png" alt="client logo" class="client-logo img-fluid" />
                       </div>
                       <p>
                         “AppointCMS has been a game-changer for my business. It's streamlined our appointment management process, 
@@ -342,7 +339,6 @@
                   <div class="card h-100">
                     <div class="card-body text-body d-flex flex-column justify-content-between h-100">
                       <div class="mb-3">
-                        <img src="/assets/img/front-pages/branding/logo-2.png" alt="client logo" class="client-logo img-fluid" />
                       </div>
                       <p>
                         “Integrating AppointCMS into our system was a breeze.
@@ -360,10 +356,9 @@
                       </div>
                       <div class="d-flex align-items-center">
                         <div class="avatar me-2 avatar-sm">
-                          <img src="/assets/img/avatars/2.png" alt="Avatar" class="rounded-circle" />
                         </div>
                         <div>
-                          <h6 class="mb-0">ames M</h6>
+                          <h6 class="mb-0">James M</h6>
                           <p class="small text-muted mb-0">Founder Penguin ltd</p>
                         </div>
                       </div>
@@ -374,7 +369,6 @@
                   <div class="card h-100">
                     <div class="card-body text-body d-flex flex-column justify-content-between h-100">
                       <div class="mb-3">
-                        <img src="/assets/img/front-pages/branding/logo-3.png" alt="client logo" class="client-logo img-fluid" />
                       </div>
                       <p>
                         "Since implementing AppointCMS, our appointment management has become hassle-free. The user interface is intuitive, 
@@ -392,7 +386,6 @@
                       </div>
                       <div class="d-flex align-items-center">
                         <div class="avatar me-2 avatar-sm">
-                          <img src="/assets/img/avatars/3.png" alt="Avatar" class="rounded-circle" />
                         </div>
                         <div>
                           <h6 class="mb-0">Brian G</h6>
@@ -406,7 +399,6 @@
                   <div class="card h-100">
                     <div class="card-body text-body d-flex flex-column justify-content-between h-100">
                       <div class="mb-3">
-                        <img src="/assets/img/front-pages/branding/logo-4.png" alt="client logo" class="client-logo img-fluid" />
                       </div>
                       <p>
                        "Since implementing AppointCMS, our appointment management has become hassle-free. The user interface is intuitive, 
@@ -424,7 +416,6 @@
                       </div>
                       <div class="d-flex align-items-center">
                         <div class="avatar me-2 avatar-sm">
-                          <img src="/assets/img/avatars/4.png" alt="Avatar" class="rounded-circle" />
                         </div>
                         <div>
                           <h6 class="mb-0">I.N</h6>
@@ -438,7 +429,6 @@
                   <div class="card h-100">
                     <div class="card-body text-body d-flex flex-column justify-content-between h-100">
                       <div class="mb-3">
-                        <img src="/assets/img/front-pages/branding/logo-6.png" alt="client logo" class="client-logo img-fluid" />
                       </div>
                       <p>
                         "AppointCMS with SMS integration has revolutionized how we communicate with our clients. The ability to send appointment reminders and notifications via SMS
@@ -454,7 +444,6 @@
                       </div>
                       <div class="d-flex align-items-center">
                         <div class="avatar me-2 avatar-sm">
-                          <img src="/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
                         </div>
                         <div>
                           <h6 class="mb-0">Sakam</h6>
@@ -503,62 +492,62 @@
   <!-- Real customers reviews: End -->
 
   <!-- Our great team: Start -->
-  <section id="landingTeam" class="section-py landing-team">
-    <div class="container">
-      <div class="text-center mb-3 pb-1">
-        <span class="badge bg-label-primary">Our Great Team</span>
-      </div>
-      <h3 class="text-center mb-1"><span class="section-title">Supported</span> by Real People</h3>
-      <p class="text-center mb-md-5 pb-3">Who is behind these great-looking interfaces?</p>
-      <div class="row gy-5 mt-2">
-        <div class="col-lg-3 col-sm-6">
-          <div class="card mt-3 mt-lg-0 shadow-none">
-            <div class="bg-label-primary position-relative team-image-box">
-              <img src="https://placehold.co/200x00/png" class="position-absolute card-img-position bottom-0 start-50 scaleX-n1-rtl img-fluid" alt="human image" />
-            </div>
-            <div class="card-body border border-label-primary border-top-0 text-center">
-              <h5 class="card-title mb-0">Dan Karanja</h5>
-              <p class="text-muted mb-0">              <p class="text-muted mb-0">Chief CTO</p>
-            </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-sm-6">
-          <div class="card mt-3 mt-lg-0 shadow-none">
-            <div class="bg-label-info position-relative team-image-box">
-              <img src="https://placehold.co/200x00/png" class="position-absolute card-img-position bottom-0 start-50 scaleX-n1-rtl img-fluid" alt="human image" />
-            </div>
-            <div class="card-body border border-label-info border-top-0 text-center">
-              <h5 class="card-title mb-0">Francis M</h5>
-              <p class="text-muted mb-0">Product Manager</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-sm-6">
-          <div class="card mt-3 mt-lg-0 shadow-none">
-            <div class="bg-label-danger position-relative team-image-box">
-              <img src="https://placehold.co/200x00/png" class="position-absolute card-img-position bottom-0 start-50 scaleX-n1-rtl img-fluid" alt="human image" />
-            </div>
-            <div class="card-body border border-label-danger border-top-0 text-center">
-              <h5 class="card-title mb-0">H F</h5>
-              <p class="text-muted mb-0">Acountant</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-sm-6">
-          <div class="card mt-3 mt-lg-0 shadow-none">
-            <div class="bg-label-success position-relative team-image-box">
-              <img src="https://placehold.co/200x00/png" class="position-absolute card-img-position bottom-0 start-50 scaleX-n1-rtl img-fluid" alt="human image" />
-            </div>
-            <div class="card-body border border-label-success border-top-0 text-center">
-              <h5 class="card-title mb-0">FD</h5>
-              <p class="text-muted mb-0">Marketing Manager</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!--<section id="landingTeam" class="section-py landing-team">-->
+  <!--  <div class="container">-->
+  <!--    <div class="text-center mb-3 pb-1">-->
+  <!--      <span class="badge bg-label-primary">Our Great Team</span>-->
+  <!--    </div>-->
+  <!--    <h3 class="text-center mb-1"><span class="section-title">Supported</span> by Real People</h3>-->
+  <!--    <p class="text-center mb-md-5 pb-3">Who is behind these great-looking interfaces?</p>-->
+  <!--    <div class="row gy-5 mt-2">-->
+  <!--      <div class="col-lg-3 col-sm-6">-->
+  <!--        <div class="card mt-3 mt-lg-0 shadow-none">-->
+  <!--          <div class="bg-label-primary position-relative team-image-box">-->
+  <!--            <img src="https://placehold.co/200x00/png" class="position-absolute card-img-position bottom-0 start-50 scaleX-n1-rtl img-fluid" alt="human image" />-->
+  <!--          </div>-->
+  <!--          <div class="card-body border border-label-primary border-top-0 text-center">-->
+  <!--            <h5 class="card-title mb-0">Dan Karanja</h5>-->
+  <!--            <p class="text-muted mb-0">              <p class="text-muted mb-0">SD</p>-->
+  <!--          </p>-->
+  <!--          </div>-->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--      <div class="col-lg-3 col-sm-6">-->
+  <!--        <div class="card mt-3 mt-lg-0 shadow-none">-->
+  <!--          <div class="bg-label-info position-relative team-image-box">-->
+  <!--            <img src="https://placehold.co/200x00/png" class="position-absolute card-img-position bottom-0 start-50 scaleX-n1-rtl img-fluid" alt="human image" />-->
+  <!--          </div>-->
+  <!--          <div class="card-body border border-label-info border-top-0 text-center">-->
+  <!--            <h5 class="card-title mb-0">Francis M</h5>-->
+  <!--            <p class="text-muted mb-0">Product Manager</p>-->
+  <!--          </div>-->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--      <div class="col-lg-3 col-sm-6">-->
+  <!--        <div class="card mt-3 mt-lg-0 shadow-none">-->
+  <!--          <div class="bg-label-danger position-relative team-image-box">-->
+  <!--            <img src="https://placehold.co/200x00/png" class="position-absolute card-img-position bottom-0 start-50 scaleX-n1-rtl img-fluid" alt="human image" />-->
+  <!--          </div>-->
+  <!--          <div class="card-body border border-label-danger border-top-0 text-center">-->
+  <!--            <h5 class="card-title mb-0">Brian G</h5>-->
+  <!--            <p class="text-muted mb-0">SD</p>-->
+  <!--          </div>-->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--      <div class="col-lg-3 col-sm-6">-->
+  <!--        <div class="card mt-3 mt-lg-0 shadow-none">-->
+  <!--          <div class="bg-label-success position-relative team-image-box">-->
+  <!--            <img src="https://placehold.co/200x00/png" class="position-absolute card-img-position bottom-0 start-50 scaleX-n1-rtl img-fluid" alt="human image" />-->
+  <!--          </div>-->
+  <!--          <div class="card-body border border-label-success border-top-0 text-center">-->
+  <!--            <h5 class="card-title mb-0">Jamila</h5>-->
+  <!--            <p class="text-muted mb-0">Marketing Manager</p>-->
+  <!--          </div>-->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <!--</section>-->
   <!-- Our great team: End -->
 
 
@@ -726,7 +715,7 @@
         <div class="col-lg-6 text-center text-lg-start">
           <h6 class="h2 text-primary fw-bold mb-1">Ready to Get Started?</h6>
           <p class="fw-medium mb-4">Start your project with a 14-day free trial</p>
-          <a href="payment.html" class="btn btn-primary">Get Started</a>
+          <a href="" class="btn btn-primary">Get Started</a>
         </div>
         <div class="col-lg-6 pt-lg-5 text-center text-lg-end">
           <img src="/assets/img/front-pages/landing-page/cta-dashboard.png" alt="cta dashboard" class="img-fluid" />

@@ -86,7 +86,6 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Role</th>
-                        <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -95,7 +94,6 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Role</th>
-                        <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </tfoot>
@@ -105,8 +103,8 @@
                     <tr>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>{{ $user->role }}</td>
-                        <td>{{ $user->status }}</td>
+                        <td>{{ $user->hasRole('admin') ? 'Admin' : 'Secretary' }}</td>
+                    
                         <td>
                             <a href="#" class="btn btn-primary btn-sm">Edit</a>
                             <form action="#" method="POST" style="display: inline;">

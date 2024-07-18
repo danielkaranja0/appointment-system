@@ -76,6 +76,7 @@ public function update(Request $request, $id)
         // 'status' => 'required|string|max:255',
     ]);
 
+
     // Find the appointment by ID
     $appointment = Appointment::findOrFail($id);
 
@@ -83,7 +84,7 @@ public function update(Request $request, $id)
     $appointment->update($validatedData);
 
     // Redirect back to the edit page with a success message
-    return redirect()->back()->with('success', 'Appointment updated successfully');
+    return redirect()->back();
 }
 
 
@@ -107,8 +108,8 @@ public function update(Request $request, $id)
         // Update the appointment with the validated data
         $appointment->update($validatedData);
 
-        // Return a success response
-        return response()->json(['message' => 'Appointment rescheduled successfully']);
+        // Redirect back to the edit page with a success message
+        return redirect()->back();
     }
 
     
@@ -168,7 +169,7 @@ public function update(Request $request, $id)
             $appointment->save();
     
             // Construct the message for the SMS notification
-            $message = 'Hello ' . $appointment->name . ', your appointment is scheduled on ' . $appointment->appointment_date . ' at ' . $appointment->appointment_time . PHP_EOL . 'scheduled by Dama Mobile Spares' . PHP_EOL . 'powered by Skyliq Solutions';
+            $message = 'Hello ' . $appointment->name . ', you have an appointment scheduled on ' . $appointment->appointment_date . ' at ' . $appointment->appointment_time . ' for '    . $appointment->description .  PHP_EOL;
 
     
             // Send SMS notification

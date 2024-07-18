@@ -43,21 +43,21 @@ Route::get('/support', function () {
 Auth::routes();
 
 Route::get('/dashboard', function () {
-    return view('dashboard.index');
+    return view('dashboard.calendar');
 });
 
 Route::get('/appointment', function () {
     // Fetch appointments data from your database and pass it to the view
     $appointments = App\Models\Appointment::all(); // Adjust this according to your database model
-    
-    return view('dashboard\appointment', compact('appointments'));
+
+    return view('dashboard.appointment', compact('appointments'));
 });
 
 Route::get('/user-management', function () {
     // Fetch appointments data from your database and pass it to the view
-    $users = App\Models\User::all(); // Adjust this according to your database model
-    
-    return view('dashboard\user-management', compact('users'));
+    $users = App\Models\User::with('roles')->get(); // Adjust this according to your database model
+
+    return view('dashboard.user-management', compact('users'));
 });
 
 
@@ -79,27 +79,33 @@ Route::get('/settings', function () {
     return view('settings');
 });
 
+Route::get('/appointments', [AppointmentController::class, 'index'])->name('appointments.index');
+
 Route::post('appointment/store', [AppointmentController::class, 'store'])->name('appointment.store');
-
-Route::get('/appointment/{id}/edit', [AppointmentController::class, 'edit'])->name('appointment.edit');
-
-
-
-Route::put('/appointment/{id}', [AppointmentController::class, 'update'])->name('appointment.update');
-
-
 
 Route::delete('/appointments/{id}', [AppointmentController::class, 'destroy']);
 
-Route::put('/appointment/{id}/refer', [AppointmentController::class, 'refer'])->name('appointment.refer');
-Route::put('/appointment/{id}/approve', [AppointmentController::class, 'approve'])->name('appointment.approve');
-Route::put('/appointment/{id}/reject', [AppointmentController::class, 'reject'])->name('appointment.reject');
+Route::put('/appointment/{id}/reschedule', [AppointmentController::class, 'reschedule'])->name('appointment.reschedule');
 
-Route::get('/appointment/{id}', [AppointmentController::class, 'show'])->name('appointment.show');
+Route::group(['middleware' => 'roles', 'roles' => ['admin']], function () {
 
-Route::put('/appointment/{id}', [AppointmentController::class, 'update'])->name('appointment.update');
+    Route::get('/appointment/{id}/edit', [AppointmentController::class, 'edit'])->name('appointment.edit');
 
-Route::put('/appointments/{id}/reschedule', [AppointmentController::class, 'reschedule'])->name('appointment.reschedule');
+    Route::put('/appointment/{id}/refer', [AppointmentController::class, 'refer'])->name('appointment.refer');
+    Route::put('/appointment/{id}/approve', [AppointmentController::class, 'approve'])->name('appointment.approve');
+    Route::put('/appointment/{id}/reject', [AppointmentController::class, 'reject'])->name('appointment.reject');
 
+    Route::get('/appointment/{id}', [AppointmentController::class, 'show'])->name('appointment.show');
 
-Route::get('/appointments', [AppointmentController::class, 'index'])->name('appointments.index');
+    Route::put('/appointment/{id}', [AppointmentController::class, 'update'])->name('appointment.update');
+
+    Route::put('/appointment/{id}/reschedule', [AppointmentController::class, 'reschedule'])->name('appointment.reschedule');
+        // Add ability for admin to create appointments
+
+     
+
+});
+
+Route::group(['middleware' => 'roles', 'roles' => ['secretary']], function () {
+    // Route::delete('/appointments/{id}', [AppointmentController::class, 'destroy']);
+});

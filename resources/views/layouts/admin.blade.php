@@ -8,12 +8,14 @@
 
     <title>AppointCMS</title>
     <meta name="description"
-        content="Most Powerful &amp; Comprehensive Bootstrap 5 HTML Admin Dashboard Template built for developers!" />
-    <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
+        content="AppointCMS" />
+    <meta name="keywords" content="AppointCMS">
     <!-- laravel CRUD token -->
-    <meta name="csrf-token" content="WvBWUaGOEAeS2gsLIheEdLTVLRVTvO3HBUC8dIP9">
+    <!--<meta name="csrf-token" content="WvBWUaGOEAeS2gsLIheEdLTVLRVTvO3HBUC8dIP9">-->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Canonical SEO -->
-    <link rel="canonical" href="#item/sneat-bootstrap-laravel-admin-template/">
+    <link rel="canonical" href="">
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="" />
 
@@ -134,14 +136,14 @@
 
 
 
-                    <li class="menu-item ">
-                        <a href="{{ url('/email') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-envelope"></i>
-                            <div class="text-truncate">Email</div>
-                        </a>
+                    <!--<li class="menu-item ">-->
+                    <!--    <a href="{{ url('/email') }}" class="menu-link">-->
+                    <!--        <i class="menu-icon tf-icons bx bx-envelope"></i>-->
+                    <!--        <div class="text-truncate">Email</div>-->
+                    <!--    </a>-->
 
 
-                    </li>
+                    <!--</li>-->
                     <li class="menu-item ">
                         <a href="{{ url('/calendar') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-calendar"></i>
@@ -250,22 +252,22 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
-                                        <a class="dropdown-item active" href="index.html" data-language="en">
+                                        <a class="dropdown-item active" href="" data-language="en">
                                             <span class="align-middle">English</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item " href="index.html" data-language="fr">
+                                        <a class="dropdown-item " href="" data-language="fr">
                                             <span class="align-middle">French</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item " href="index.html" data-language="de">
+                                        <a class="dropdown-item " href="" data-language="de">
                                             <span class="align-middle">German</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item " href="index.html" data-language="pt">
+                                        <a class="dropdown-item " href="" data-language="pt">
                                             <span class="align-middle">Portuguese</span>
                                         </a>
                                     </li>
@@ -295,7 +297,7 @@
                                                     class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
                                                     <i class="bx bx-calendar fs-4"></i>
                                                 </span>
-                                                <a href="calendar.html" class="stretched-link">Calendar</a>
+                                                <a href="" class="stretched-link">Calendar</a>
                                                 <small class="text-muted mb-0">Appointments</small>
                                             </div>
                                             <div class="dropdown-shortcuts-item col">
@@ -303,7 +305,7 @@
                                                     class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
                                                     <i class="bx bx-food-menu fs-4"></i>
                                                 </span>
-                                                <a href="app/invoice/list.html" class="stretched-link">Invoice App</a>
+                                                <a href="" class="stretched-link">Invoice App</a>
                                                 <small class="text-muted mb-0">Manage Accounts</small>
                                             </div>
                                         </div>
@@ -313,7 +315,7 @@
                                                     class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
                                                     <i class="bx bx-user fs-4"></i>
                                                 </span>
-                                                <a href="app/user/list.html" class="stretched-link">User App</a>
+                                                <a href="" class="stretched-link">User App</a>
                                                 <small class="text-muted mb-0">Manage Users</small>
                                             </div>
                                             <div class="dropdown-shortcuts-item col">
@@ -321,7 +323,7 @@
                                                     class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
                                                     <i class="bx bx-check-shield fs-4"></i>
                                                 </span>
-                                                <a href="app/access-roles.html" class="stretched-link">Role
+                                                <a href="" class="stretched-link">Role
                                                     Management</a>
                                                 <small class="text-muted mb-0">Permission</small>
                                             </div>
@@ -332,7 +334,7 @@
                                                     class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
                                                     <i class="bx bx-pie-chart-alt-2 fs-4"></i>
                                                 </span>
-                                                <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1"
+                                                <a href=""
                                                     class="stretched-link">Dashboard</a>
                                                 <small class="text-muted mb-0">User Profile</small>
                                             </div>
@@ -341,7 +343,7 @@
                                                     class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
                                                     <i class="bx bx-cog fs-4"></i>
                                                 </span>
-                                                <a href="pages/account-settings-account.html"
+                                                <a href=""
                                                     class="stretched-link">Setting</a>
                                                 <small class="text-muted mb-0">Account Settings</small>
                                             </div>
@@ -352,7 +354,7 @@
                                                     class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
                                                     <i class="bx bx-help-circle fs-4"></i>
                                                 </span>
-                                                <a href="pages/faq.html" class="stretched-link">FAQs</a>
+                                                <a href="" class="stretched-link">FAQs</a>
                                                 <small class="text-muted mb-0">FAQs & Articles</small>
                                             </div>
                                             <div class="dropdown-shortcuts-item col">
@@ -360,7 +362,7 @@
                                                     class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
                                                     <i class="bx bx-window-open fs-4"></i>
                                                 </span>
-                                                <a href="modal-examples.html" class="stretched-link">Modals</a>
+                                                <a href="" class="stretched-link">Modals</a>
                                                 <small class="text-muted mb-0">Useful Popups</small>
                                             </div>
                                         </div>
@@ -423,8 +425,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="flex-grow-1">
-                                                        <h6 class="mb-1">Congratulation Lettie 🎉</h6>
-                                                        <p class="mb-0">Won the monthly best seller gold badge</p>
+                                                        <h6 class="mb-1">AppointCMS</h6>
+                                                        <p class="mb-0">appointment added successfully</p>
                                                         <small class="text-muted">1h ago</small>
                                                     </div>
                                                     <div class="flex-shrink-0 dropdown-notifications-actions">
@@ -447,8 +449,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="flex-grow-1">
-                                                        <h6 class="mb-1">Charles Franklin</h6>
-                                                        <p class="mb-0">Accepted your connection</p>
+                                                        <h6 class="mb-1">appointment Booking</h6>
+                                                        <p class="mb-0">Approved</p>
                                                         <small class="text-muted">12hr ago</small>
                                                     </div>
                                                     <div class="flex-shrink-0 dropdown-notifications-actions">
@@ -471,8 +473,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="flex-grow-1">
-                                                        <h6 class="mb-1">New Message ✉️</h6>
-                                                        <p class="mb-0">You have new message from Natalie</p>
+                                                        <h6 class="mb-1">appointment Booking</h6>
+                                                        <p class="mb-0">Approved</p>
                                                         <small class="text-muted">1h ago</small>
                                                     </div>
                                                     <div class="flex-shrink-0 dropdown-notifications-actions">
@@ -496,8 +498,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="flex-grow-1">
-                                                        <h6 class="mb-1">Whoo! You have new order 🛒 </h6>
-                                                        <p class="mb-0">ACME Inc. made new order $1,154</p>
+                                                        <h6 class="mb-1">Whoo! You have new appointment status approved </h6>
+                                                        <p class="mb-0">Rejected Appointment</p>
                                                         <small class="text-muted">1 day ago</small>
                                                     </div>
                                                     <div class="flex-shrink-0 dropdown-notifications-actions">
@@ -510,131 +512,7 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li
-                                                class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                                                <div class="d-flex">
-                                                    <div class="flex-shrink-0 me-3">
-                                                        <div class="avatar">
-                                                            <img src="assets/img/avatars/9.png" alt
-                                                                class="w-px-40 h-auto rounded-circle">
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex-grow-1">
-                                                        <h6 class="mb-1">Application has been approved 🚀 </h6>
-                                                        <p class="mb-0">Your ABC project application has been
-                                                            approved.</p>
-                                                        <small class="text-muted">2 days ago</small>
-                                                    </div>
-                                                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                                                        <a href="javascript:void(0)"
-                                                            class="dropdown-notifications-read"><span
-                                                                class="badge badge-dot"></span></a>
-                                                        <a href="javascript:void(0)"
-                                                            class="dropdown-notifications-archive"><span
-                                                                class="bx bx-x"></span></a>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li
-                                                class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                                                <div class="d-flex">
-                                                    <div class="flex-shrink-0 me-3">
-                                                        <div class="avatar">
-                                                            <span
-                                                                class="avatar-initial rounded-circle bg-label-success"><i
-                                                                    class="bx bx-pie-chart-alt"></i></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex-grow-1">
-                                                        <h6 class="mb-1">Monthly report is generated</h6>
-                                                        <p class="mb-0">July monthly financial report is generated
-                                                        </p>
-                                                        <small class="text-muted">3 days ago</small>
-                                                    </div>
-                                                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                                                        <a href="javascript:void(0)"
-                                                            class="dropdown-notifications-read"><span
-                                                                class="badge badge-dot"></span></a>
-                                                        <a href="javascript:void(0)"
-                                                            class="dropdown-notifications-archive"><span
-                                                                class="bx bx-x"></span></a>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li
-                                                class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                                                <div class="d-flex">
-                                                    <div class="flex-shrink-0 me-3">
-                                                        <div class="avatar">
-                                                            <img src="assets/img/avatars/5.png" alt
-                                                                class="w-px-40 h-auto rounded-circle">
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex-grow-1">
-                                                        <h6 class="mb-1">Send connection request</h6>
-                                                        <p class="mb-0">Peter sent you connection request</p>
-                                                        <small class="text-muted">4 days ago</small>
-                                                    </div>
-                                                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                                                        <a href="javascript:void(0)"
-                                                            class="dropdown-notifications-read"><span
-                                                                class="badge badge-dot"></span></a>
-                                                        <a href="javascript:void(0)"
-                                                            class="dropdown-notifications-archive"><span
-                                                                class="bx bx-x"></span></a>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li
-                                                class="list-group-item list-group-item-action dropdown-notifications-item">
-                                                <div class="d-flex">
-                                                    <div class="flex-shrink-0 me-3">
-                                                        <div class="avatar">
-                                                            <img src="assets/img/avatars/6.png" alt
-                                                                class="w-px-40 h-auto rounded-circle">
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex-grow-1">
-                                                        <h6 class="mb-1">New message from Jane</h6>
-                                                        <p class="mb-0">Your have new message from Jane</p>
-                                                        <small class="text-muted">5 days ago</small>
-                                                    </div>
-                                                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                                                        <a href="javascript:void(0)"
-                                                            class="dropdown-notifications-read"><span
-                                                                class="badge badge-dot"></span></a>
-                                                        <a href="javascript:void(0)"
-                                                            class="dropdown-notifications-archive"><span
-                                                                class="bx bx-x"></span></a>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li
-                                                class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                                                <div class="d-flex">
-                                                    <div class="flex-shrink-0 me-3">
-                                                        <div class="avatar">
-                                                            <span
-                                                                class="avatar-initial rounded-circle bg-label-warning"><i
-                                                                    class="bx bx-error"></i></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex-grow-1">
-                                                        <h6 class="mb-1">CPU is running high</h6>
-                                                        <p class="mb-0">CPU Utilization Percent is currently at
-                                                            88.63%,</p>
-                                                        <small class="text-muted">5 days ago</small>
-                                                    </div>
-                                                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                                                        <a href="javascript:void(0)"
-                                                            class="dropdown-notifications-read"><span
-                                                                class="badge badge-dot"></span></a>
-                                                        <a href="javascript:void(0)"
-                                                            class="dropdown-notifications-archive"><span
-                                                                class="bx bx-x"></span></a>
-                                                    </div>
-                                                </div>
-                                            </li>
+
                                         </ul>
                                     </li>
                                     <li class="dropdown-menu-footer border-top p-3">
@@ -650,7 +528,7 @@
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle">
+                                        <!--<img src="assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle">-->
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
@@ -676,13 +554,13 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="pages/profile-user.html">
+                                        <a class="dropdown-item" href="">
                                             <i class="bx bx-user me-2"></i>
                                             <span class="align-middle">My Profile</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="pages/account-settings-billing.html">
+                                        <a class="dropdown-item" href="">
                                             <span class="d-flex align-items-center align-middle">
                                                 <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
                                                 <span class="flex-grow-1 align-middle">Billing</span>
@@ -734,7 +612,7 @@
                 <footer class="content-footer footer bg-footer-theme">
                     <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
                         <div class="mb-2 mb-md-0">
-                            ©
+                            �
                             <script>
                                 document.write(new Date().getFullYear())
                             </script>

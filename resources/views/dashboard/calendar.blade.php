@@ -24,7 +24,7 @@
     }
 
     .container-fluid {
-        max-width: 1300px; /* Extend the container */
+        max-width: 1400px; /* Extend the container */
         margin: 0 auto;
         padding: 20px;
     }
@@ -85,7 +85,7 @@
     }
 
     .fc-event {
-        background-color: #007bff;
+        background-color: #6ca8e9;
         color: #fff;
         border: none;
         border-radius: 4px;
@@ -127,9 +127,9 @@
                         // Parse the response data and format it for FullCalendar
                         var events = response.map(function(appointment) {
                             return {
-                                title: appointment.name,
+                                title: appointment.description,
                                 start: appointment.appointment_date + 'T' + appointment.appointment_time, // Combine date and time
-                                allDay: false // Assuming appointments have specific times
+                                allDay: false 
                             };
                         });
                         // Render the fetched appointments on the calendar

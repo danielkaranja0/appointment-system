@@ -1,5 +1,4 @@
 @extends('layouts.admin')
-
 @section('content')
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -113,7 +112,7 @@
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Category</th>
+                            <th>Description</th>
                             <th>Phone Number</th>
                             <th>Appointment Date</th>
                             <th>Status</th>
@@ -125,25 +124,27 @@
                         @foreach ($appointments as $appointment)
                             <tr>
                                 <td>{{ $appointment->name }}</td>
-                                <td>{{ $appointment->category }}</td>
+                                <td>{{ $appointment->description }}</td>
                                 <td>{{ $appointment->phone }}</td>
                                 <td>{{ $appointment->appointment_date }} {{ $appointment->appointment_time }}</td>
                                 <td>{{ $appointment->status }}</td>
                                 <td>
                                     <!-- Buttons for actions -->
                                     <!-- Your delete button -->
+                                    @if (auth()->user()->hasRole('admin'))
+                                        <button class="btn btn-sm btn-success approve-appointment"
+                                            data-id="{{ $appointment->id }}">Approve</button>
+                                        <button class="btn btn-sm btn-warning reject-appointment"
+                                            data-id="{{ $appointment->id }}">Reject</button>
+                                        <button class="btn btn-sm btn-warning refer-appointment"
+                                            data-id="{{ $appointment->id }}">Refer</button>
+                                        <button class="btn btn-sm btn-info reschedule-appointment"
+                                            data-id="{{ $appointment->id }}" data-bs-toggle="modal"
+                                            data-bs-target="#editAppointmentModal")}}">Reschedule</button>
+                                    @endif
                                     <button class="btn btn-sm btn-danger delete-appointment"
                                         data-id="{{ $appointment->id }}" data-toggle="modal"
                                         data-target="#confirmDeleteModal">Delete</button>
-                                    <button class="btn btn-sm btn-success approve-appointment"
-                                        data-id="{{ $appointment->id }}">Approve</button>
-                                    <button class="btn btn-sm btn-warning reject-appointment"
-                                        data-id="{{ $appointment->id }}">Reject</button>
-                                    <button class="btn btn-sm btn-warning refer-appointment"
-                                        data-id="{{ $appointment->id }}">Refer</button>
-                                    <button class="btn btn-sm btn-info reschedule-appointment"
-                                        data-id="{{ $appointment->id }}" data-bs-toggle="modal"
-                                        data-bs-target="#editAppointmentModal">Reschedule</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -244,7 +245,7 @@
                 </div>
                 <div class="modal-body">
                     <!-- Edit appointment form -->
-                    <form method="POST" action="{{ route('appointment.update', $appointment->id) }}">
+                    <form action="" id="editAppointmentForm" action="" method="POST">
                         @csrf
                         @method('PUT')
                         <input type="hidden" id="editAppointmentId" name="id">
@@ -325,37 +326,6 @@
 
 @section('scripts')
     <script>
-        // JavaScript for search functionality
-        //  document.addEventListener('DOMContentLoaded', function() {
-        //         const searchInput = document.getElementById('searchInput');
-        //         const appointmentsTable = document.getElementById('appointmentsTable');
-
-        //         searchInput.addEventListener('input', function() {
-        //             const searchValue = this.value.toLowerCase();
-        //             const rows = appointmentsTable.getElementsByTagName('tr');
-
-        //             for (let i = 1; i < rows.length; i++) {
-        //                 const name = rows[i].getElementsByTagName('td')[1].textContent.toLowerCase();
-        //                 const category = rows[i].getElementsByTagName('td')[2].textContent.toLowerCase();
-        //                 const phoneNumber = rows[i].getElementsByTagName('td')[3].textContent.toLowerCase();
-        //                 const appointmentDate = rows[i].getElementsByTagName('td')[4].textContent.toLowerCase();
-        //                 const appointmentTime = rows[i].getElementsByTagName('td')[5].textContent.toLowerCase();
-        //                 const status = rows[i].getElementsByTagName('td')[6].textContent.toLowerCase();
-        //                 const description = rows[i].getElementsByTagName('td')[7].textContent.toLowerCase();
-
-        //                 if (name.includes(searchValue) || category.includes(searchValue) || phoneNumber.includes(searchValue) || appointmentDate.includes(searchValue) || appointmentTime.includes(searchValue) || status.includes(searchValue) || description.includes(searchValue)) {
-        //                     rows[i].style.display = '';
-        //                 } else {
-        //                     rows[i].style.display = 'none';
-        //                 }
-        //             }
-        //         });
-        //     });
-
-
-
-
-
         //reject 
         document.querySelectorAll('.reject-appointment').forEach(button => {
             button.addEventListener('click', function(e) {
@@ -520,73 +490,38 @@
             });
         });
 
+document.addEventListener('DOMContentLoaded', function() {
+    // Event listener for clicking the "Reschedule" button
+    document.querySelectorAll('.reschedule-appointment').forEach(button => {
+        button.addEventListener('click', function() {
+            const appointmentId = this.getAttribute('data-id');
+            // Assuming you have an API endpoint to fetch appointment details
+            fetch(`/appointment/${appointmentId}`, {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Populate the edit appointment form with appointment details
+                document.getElementById('editAppointmentId').value = data.id;
+                document.getElementById('editAppointmentName').value = data.name;
+                document.getElementById('editAppointmentCategory').value = data.category;
+                document.getElementById('editAppointmentPhone').value = data.phone;
+                document.getElementById('editAppointmentDate').value = data.appointment_date;
+                document.getElementById('editAppointmentTime').value = data.appointment_time;
+                document.getElementById('editAppointmentDescription').value = data.description;
 
-
-        document.addEventListener('DOMContentLoaded', function() {
-            // Event listener for clicking the "Reschedule" button
-            document.querySelectorAll('.reschedule-appointment').forEach(button => {
-                button.addEventListener('click', function() {
-                    const appointmentId = this.getAttribute('data-id');
-                    // Assuming you have an API endpoint to fetch appointment details
-                    fetch(`/appointment/${appointmentId}`, {
-                            method: 'GET'
-                        })
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Network response was not ok');
-                            }
-                            return response.json();
-                        })
-                        .then(data => {
-                            // Populate the edit appointment form with appointment details
-                            document.getElementById('editAppointmentId').value = data.id;
-                            document.getElementById('editAppointmentName').value = data.name;
-                            document.getElementById('editAppointmentCategory').value = data
-                                .category;
-                            document.getElementById('editAppointmentPhone').value = data.phone;
-                            document.getElementById('editAppointmentDate').value = data
-                                .appointment_date;
-                            document.getElementById('editAppointmentTime').value = data
-                                .appointment_time;
-                            document.getElementById('editAppointmentDescription').value = data
-                                .description;
-                            // Show the edit appointment modal
-                            const modal = new bootstrap.Modal(document.getElementById(
-                                'editAppointmentModal'));
-                            modal.show();
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                        });
-                });
-            });
-
-            // Event listener for submitting the edit appointment form
-            document.getElementById('editAppointmentForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const formData = new FormData(this);
-                const appointmentId = formData.get('id');
-                // Assuming you have an API endpoint to update appointment details
-                fetch(`/appointment/${appointmentId}`, {
-                        method: 'PUT',
-                        body: formData,
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        }
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        // Reload the appointments table view after a short delay to ensure changes are reflected
-                        setTimeout(() => {
-                            location.reload();
-                        }, 500);
-                    })
-                    .catch(error => {
-                        console.error('Error:', error); // Handle error
-                    });
-            });
+                // Update the form action attribute with the correct URL
+                document.getElementById('editAppointmentForm').action = `/appointment/${appointmentId}/reschedule`;
+                
+                // Show the edit appointment modal
+                const modal = new bootstrap.Modal(document.getElementById('editAppointmentModal'));
+                modal.show();
+            })
+            .catch(error => console.error('Error:', error));
         });
+    });
+});
+
+
     </script>
 @endsection
