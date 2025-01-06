@@ -169,7 +169,11 @@ public function update(Request $request, $id)
             $appointment->save();
     
             // Construct the message for the SMS notification
-            $message = 'Hello ' . $appointment->name . ', you have an appointment scheduled on ' . $appointment->appointment_date . ' at ' . $appointment->appointment_time . ' for '    . $appointment->description .  PHP_EOL;
+        $message = 'Hello ' . $appointment->name . ', you have an appointment scheduled on ' 
+           . $appointment->appointment_date . ' at ' . $appointment->appointment_time 
+           . ' for ' . $appointment->description . '.' . PHP_EOL 
+           . 'For inquiries call: 0113936845';
+
 
     
             // Send SMS notification
@@ -200,7 +204,10 @@ public function update(Request $request, $id)
         $phoneNumber = $request->input('phone');
 
         // Send sms notification
-        $message = 'Hello, you have an appointment referred to you scheduled on ' . $appointment->appointment_date . ' at ' . $appointment->appointment_time;
+       $message = 'Hello, you have an appointment referred to you for ' . $appointment->name . 
+           ' scheduled on ' . $appointment->appointment_date . ' at ' . $appointment->appointment_time . 
+           ".\nFor inquiries call: 0113936845";
+
         $this->sendSms($phoneNumber, $message);
 
         // Return a success response
@@ -219,12 +226,20 @@ public function update(Request $request, $id)
 
     public function index()
     {
-        // Fetch appointments data from your database
-        $appointments = Appointment::all(); // Adjust this according to your database model
+            // Fetch all appointments and order them by appointment_date and appointment_time in ascending order
+    $appointments = Appointment::orderBy('appointment_date', 'desc')
+                               ->orderBy('appointment_time', 'desc')
+                               ->get();
+
+
         
         // Return the appointments data as JSON
         return response()->json($appointments);
     }
+    
+    
+    
+
 
 
 

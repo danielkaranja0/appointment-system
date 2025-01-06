@@ -33,7 +33,8 @@ trait SMSNotification
             // Send SMS
             $result   = $sms->send([
                 'to'      => $phoneNumber,
-                'message' => $message
+                'message' => $message,
+                'from' => "DMSAPPOINT",
             ]);
         
             return $result;

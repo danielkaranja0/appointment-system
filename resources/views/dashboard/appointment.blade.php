@@ -1,4 +1,16 @@
 @extends('layouts.admin')
+@section('styles')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/2.1.0/css/dataTables.bootstrap4.css">
+
+<!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
+<!-- DataTables JS -->
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+
 @section('content')
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -13,7 +25,7 @@
                                     <h4 class="mb-0 me-2">21,459</h4>
                                     <small class="text-success">(+29%)</small>
                                 </div>
-                                <p class="mb-0">Total Users</p>
+                                <p class="mb-0">Total Approved</p>
                             </div>
                             <div class="avatar">
                                 <span class="avatar-initial rounded bg-label-primary">
@@ -34,7 +46,7 @@
                                     <h4 class="mb-0 me-2">21,459</h4>
                                     <small class="text-success">(+29%)</small>
                                 </div>
-                                <p class="mb-0">Total Users</p>
+                                <p class="mb-0">Total Rejected</p>
                             </div>
                             <div class="avatar">
                                 <span class="avatar-initial rounded bg-label-primary">
@@ -55,7 +67,7 @@
                                     <h4 class="mb-0 me-2">21,459</h4>
                                     <small class="text-success">(+29%)</small>
                                 </div>
-                                <p class="mb-0">Total Users</p>
+                                <p class="mb-0">Total Rescheduled</p>
                             </div>
                             <div class="avatar">
                                 <span class="avatar-initial rounded bg-label-primary">
@@ -76,7 +88,7 @@
                                     <h4 class="mb-0 me-2">21,459</h4>
                                     <small class="text-success">(+29%)</small>
                                 </div>
-                                <p class="mb-0">Total Users</p>
+                                <p class="mb-0">Total Referred</p>
                             </div>
                             <div class="avatar">
                                 <span class="avatar-initial rounded bg-label-primary">
@@ -107,7 +119,7 @@
                 </div>
             </div>
 
-            <div class="card-datatable table-responsive">
+  <div class="card-datatable table-responsive">
                 <table class="datatables-users table border-top">
                     <thead>
                         <tr>
@@ -151,6 +163,23 @@
                     </tbody>
                 </table>
             </div>
+
+
+
+<!-- Initialize DataTable -->
+<script>
+    $(document).ready(function() {
+        // Initialize DataTable with search and pagination functionality
+        $('#appointmentsTable').DataTable({
+            "paging": true,  // Enable pagination
+            "searching": true,  // Enable search
+            "lengthChange": false,  // Disable length change dropdown
+            "info": true,  // Show info about the current page
+            "autoWidth": false  // Automatically adjust column widths
+        });
+    });
+</script>
+
         </div>
     </div>
 
@@ -523,5 +552,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-    </script>
+    </script
+   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.0/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.0/js/dataTables.bootstrap4.min.js"></script>
+
+
+
+
 @endsection

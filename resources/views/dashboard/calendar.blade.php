@@ -3,13 +3,36 @@
 <div class="content-wrapper">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <!-- Calendar content here -->
                 <div id="calendar"></div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Modal for showing event details -->
+<div id="eventModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eventModalLabel">Appointment Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Description:</strong> <span id="eventDescription"></span></p>
+                <p><strong>Time:</strong> <span id="eventTime"></span></p>
+                <p><strong>Date:</strong> <span id="eventDate"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 @section('scripts')
@@ -19,127 +42,174 @@
         margin: 0;
         padding: 0;
         font-family: Arial, sans-serif;
-        background-color: #f2f2f2;
-        color: #000; /* Black text color */
+        background-color: #f7f8fa;
+        color: #343a40; /* Darker text color for contrast */
     }
 
     .container-fluid {
-        max-width: 1400px; /* Extend the container */
-        margin: 0 auto;
+        max-width: 100%;
         padding: 20px;
     }
 
     #calendar {
-        background-color: #fff;
-        border-radius: 6px;
-        box-shadow: 0 2px 4px rgba(242, 240, 240, 0.1);
-        width: 100%; /* Set calendar width to 100% */
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        padding: 20px;
     }
 
     .fc-toolbar {
         padding: 10px;
-        background-color: #f8f9fa; /* Light gray background */
-        border-radius: 6px 6px 0 0;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        background-color: #4e73df; /* Soft blue for the header */
+        border-radius: 8px 8px 0 0;
         margin-bottom: 20px;
     }
 
+    .fc-toolbar h2 {
+        margin: 0;
+        font-weight: bold;
+        color: #ffffff; /* White text for contrast */
+    }
+
     .fc-button {
-        background-color: #f8f9fa; /* Light gray background */
-        color: #000; /* Black text color */
-        border: none;
+        background-color: #ffffff;
+        color: #4e73df; /* Matching button color with the toolbar */
+        border: 1px solid #4e73df;
         border-radius: 4px;
         padding: 8px 16px;
         cursor: pointer;
         margin-right: 5px;
+        font-weight: bold;
     }
 
     .fc-button:hover {
-        background-color: #e2e6ea; /* Darker gray background on hover */
-    }
-
-    .fc-button.fc-state-disabled {
-        background-color: #cccccc;
-        cursor: default;
+        background-color: #4e73df;
+        color: #ffffff; /* White text when hovered */
+        border-color: #4e73df;
     }
 
     .fc-day-header {
-        background-color: #f8f9fa;
-        font-weight: bold;
+        background-color: #f1f3f5;
         text-align: center;
-        border: none;
+        font-weight: bold;
         padding: 10px;
+        color: #6c757d; /* Light grey for day headers */
     }
 
     .fc-day {
         padding: 10px;
-        border: none;
-    }
-
-    .fc-day-top {
-        text-align: center;
-    }
-
-    .fc-today {
-        background-color: #f0f0f0;
     }
 
     .fc-event {
-        background-color: #6ca8e9;
-        color: #fff;
-        border: none;
+        background-color: #1cc88a; /* Green event color for success */
+        color: #ffffff;
         border-radius: 4px;
-        padding: 2px 4px;
-        margin-bottom: 2px;
+        padding: 5px 10px;
+        font-size: 12px;
     }
 
     .fc-event:hover {
-        background-color: #0056b3;
+        background-color: #17a673; /* Darker green for hover effect */
+    }
+
+    .fc-event.fc-state-disabled {
+        background-color: #e9ecef;
+        color: #6c757d;
+    }
+
+    .fc-today {
+        background-color: #e9ecef; /* Light grey background for today */
+    }
+
+    /* Modal styling */
+    .modal-header {
+        background-color: #4e73df;
+        color: white;
+    }
+
+    .modal-body {
+        font-size: 16px;
+        color: #343a40;
+    }
+
+    .modal-footer {
+        text-align: right;
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+        .container-fluid {
+            padding: 10px;
+        }
+
+        #calendar {
+            padding: 10px;
+        }
+
+        .fc-toolbar h2 {
+            font-size: 18px;
+        }
+
+        .fc-button {
+            font-size: 12px;
+            padding: 6px 12px;
+        }
     }
 </style>
 
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
 <script>
     $(document).ready(function() {
-        // Initialize the calendar
-        var calendar = $("#calendar").fullCalendar({
+        var calendar = $('#calendar').fullCalendar({
             header: {
-                left: "title",
-                center: "agendaDay,agendaWeek,month",
-                right: "prev,next today"
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
             },
             editable: true,
-            firstDay: 1, //  1(Monday) this can be changed to 0(Sunday) for the USA system
+            droppable: true,
             selectable: true,
-            defaultView: "month",
-            events: [], // Initially, no events
+            firstDay: 1,
+            defaultView: 'month',
+            eventLimit: true, // Limits the number of events per day
+            events: [], // Initially empty; will fetch events from the server
 
-            // Fetch appointments data from the backend and render them on the calendar
+            // Fetch appointments from the backend and render them on the calendar
             eventSources: [
-                // Fetch appointments from the route
                 {
                     url: '/appointments',
                     type: 'GET',
                     success: function(response) {
-                        // Parse the response data and format it for FullCalendar
                         var events = response.map(function(appointment) {
                             return {
                                 title: appointment.description,
-                                start: appointment.appointment_date + 'T' + appointment.appointment_time, // Combine date and time
-                                allDay: false 
+                                start: appointment.appointment_date + 'T' + appointment.appointment_time,
+                                allDay: false,
+                                description: appointment.description, // Pass description
+                                time: appointment.appointment_time,  // Pass appointment time
+                                date: appointment.appointment_date  // Pass appointment date
                             };
                         });
-                        // Render the fetched appointments on the calendar
                         calendar.fullCalendar('renderEvents', events, true);
                     },
                     error: function(error) {
                         console.error('Error fetching appointments:', error);
+                        alert('There was an error loading the calendar events.');
                     }
                 }
-            ]
+            ],
+
+            // Handling event click to show more details in the modal
+            eventClick: function(event) {
+                $('#eventDescription').text(event.description); // Display description
+                $('#eventTime').text(event.time); // Display time
+                $('#eventDate').text(event.date); // Display date
+                $('#eventModal').modal('show'); // Show the modal with event details
+            }
         });
     });
 </script>
